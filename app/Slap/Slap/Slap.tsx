@@ -36,7 +36,7 @@ export const Slap = ({
   return (
     <div>
       <img src={currentImage} className="mx-auto" onMouseEnter={onMouseEnter} onMouseLeave={slap} />
-      {!hideCounter && <div>{slapCount}</div>}
+      {!hideCounter && <div className="text-center font-title text-white">{slapCount}</div>}
     </div>
   )
 }

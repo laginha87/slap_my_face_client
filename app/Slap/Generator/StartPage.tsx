@@ -22,7 +22,7 @@ const Step = ({ state, dispatch }) => {
     case TAKE_PHOTO_STEP:
       return <TakePhotoStep dispatch={dispatch} state={state} />;
     case UPLOAD_STEP:
-      return <UploadStep dispatch={dispatch} state={state}/>;
+      return <UploadStep dispatch={dispatch} state={state} />;
     case REVIEW_STEP:
       return <ReviewStep dispatch={dispatch} state={state} />;
     default:
@@ -47,6 +47,7 @@ export const StartPage = () => {
 
   return (
     <div className="bg-black text-white mx-auto container">
+      <h1 className="text-4xl text-center font-title">Slap My Face</h1>
       <BodyPixProvider>
         <StepCounter step={state.step} />
         <Title step={state.step} />
