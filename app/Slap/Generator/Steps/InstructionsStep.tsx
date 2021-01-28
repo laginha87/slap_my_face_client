@@ -23,7 +23,7 @@ export const InstructionsStep = ({ dispatch }: PropTypes) => {
   return (
     <div style={VIDEO_CONSTRAINTS} className="mx-auto">
       <div className='flex items-center flex-col justify-center h-full'>
-        <ol className="list-decimal font-title text-lg pb-2">
+        <ol className="list-decimal text-lg pb-2">
           <li>Authorize browser to use camera</li>
           <li>Follow wizard to take pics</li>
           <li>Preview & Upload</li>

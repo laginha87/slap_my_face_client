@@ -76,7 +76,7 @@ export const TakePhotoStep: FC<{ dispatch: Dispatch, state: IState }> = ({ dispa
       </div>
       <div className="absolute z-10 top-0 left-0 w-full h-full flex items-end pb-4 justify-center">
         {firstPass && <Button onClick={ready}>Ready? </Button>}
-        {!done && <div className="text-5xl font-title">{text}</div>}
+        {!done && <div className="text-5xl">{text}</div>}
         {done && <>
           <Button onClick={tryAgain} theme='secondary'>Try Again</Button>
           <Button onClick={next} ml='2'>Next</Button>

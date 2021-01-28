@@ -12,7 +12,7 @@ interface PropTypes {
 
 const Input = ({ name, label, className = '', Component = null, type = 'text' }) => {
   const inputArgs = { name, className: "mt-1 block w-full border-0 border-b-2 border-gray-400 focus:ring-0 focus:border-white bg-transparent p-0 pb-1" };
-  return <label className={`block font-title text-white ${className}`}>
+  return <label className={`block ${className}`}>
     <span>{label}</span>
     {Component ? <Component {...inputArgs} /> : <input type={type} {...inputArgs} />}
   </label>

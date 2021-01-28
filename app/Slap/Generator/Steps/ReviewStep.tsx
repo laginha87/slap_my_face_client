@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Slap } from '../../Slap/Slap'
+import { useCallback } from 'react';
 import { Dispatch, getSelectedImage, IState, resetImagesAction, setStepAction, UPLOAD_STEP } from '../Reducer'
 import { Button } from '../../Common/Button';
-import { useCallback } from 'react';
+import { SlapArea } from '../../Slap/SlapArea';
 
 interface PropTypes {
   dispatch: Dispatch,
@@ -20,7 +20,7 @@ export const ReviewStep = ({ state, dispatch }: PropTypes) => {
 
   return (
     <div>
-      <Slap
+      <SlapArea
         hideCounter
         center={getSelectedImage(state, 'center')}
         left={getSelectedImage(state, 'left')}

@@ -39,15 +39,15 @@ const STEPS_TEXTS =
 };
 
 const Title = ({ step }) => {
-  return <h1 className="font-title text-5xl text-center my-5">{STEPS_TEXTS[step]}</h1>;
+  return <h1 className="text-5xl text-center my-5">{STEPS_TEXTS[step]}</h1>;
 }
 
 export const StartPage = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   return (
-    <div className="bg-black text-white mx-auto container">
-      <h1 className="text-4xl text-center font-title">Slap My Face</h1>
+    <div className="mx-auto container">
+      <h1 className="text-4xl text-center">Slap My Face</h1>
       <BodyPixProvider>
         <StepCounter step={state.step} />
         <Title step={state.step} />

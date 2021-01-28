@@ -15,7 +15,7 @@ interface PropTypes extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 };
 export const Button: FC<PropTypes> = ({ children, ml = '0', theme = 'primary', className: _className, ...args }) => {
   return (
-    <button className={`font-title cursor-pointer px-5 py-2 ml-${ml} ${CLASSES[theme]}`} {...args}>
+    <button className={`cursor-pointer px-5 py-2 ml-${ml} ${CLASSES[theme]}`} {...args}>
       {children}
     </button>
   )

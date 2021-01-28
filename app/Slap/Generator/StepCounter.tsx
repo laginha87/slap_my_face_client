@@ -23,8 +23,8 @@ const Step: React.FC<{ currentIndex: number, indexOfStep: number }> = ({ current
           {isActive ? <Bar fullWidth color='gray-500' /> : isNext && <Bar color='gray-500' />}
         </div>
       </div>}
-      <div className={"w-10 h-10 mx-auto rounded-full text-lg text-white flex items-center " + (isActive ? 'bg-gray-500' : 'bg-white')}>
-        <span className="text-center text-white w-full">
+      <div className={"w-10 h-10 mx-auto rounded-full text-lg flex items-center " + (isActive ? 'bg-gray-500' : 'bg-white')}>
+        <span className="text-center w-full">
           <svg className="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"></svg>
         </span>
       </div>
