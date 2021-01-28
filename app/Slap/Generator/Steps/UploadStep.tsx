@@ -3,6 +3,7 @@ import { SyntheticEvent, useCallback, useState } from 'react';
 import { Button } from '../../Common/Button';
 import { useS3Client } from '../useS3Client';
 import { Dispatch, getSelectedImage, IState, SIDES, } from '../Reducer'
+import { ProgressBar } from '../../Common/ProgressBar';
 
 interface PropTypes {
   dispatch: Dispatch,
@@ -21,24 +22,6 @@ const UPLOADED_STATUS = 'UPLOADED_STATUS';
 const UPLOADING_STATUS = 'UPLOADING_STATUS';
 const FORM_STATUS = 'FORM_STATUS';
 const TOTAL_FILES = 5;
-
-const ProgressBar = ({ value, total }) => <div className="relative pt-1">
-  <div className="flex mb-2 items-center justify-between">
-    <div>
-      <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
-        Generating
-    </span>
-    </div>
-    <div className="text-right">
-      <span className="text-xs font-semibold inline-block text-green-600">
-        {Math.ceil((value / total) * 100)} %
-    </span>
-    </div>
-  </div>
-  <div className="overflow-hidden h-10 mb-4 text-xs flex rounded bg-green-200">
-    <div style={{ width: value / total + "%" }} className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
-  </div>
-</div>
 
 export const UploadStep = ({ state }: PropTypes) => {
 

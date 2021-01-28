@@ -20,18 +20,15 @@ const Step: React.FC<{ currentIndex: number, indexOfStep: number }> = ({ current
     <div className="relative mb-2">
       {currentIndex != 0 && <div className="absolute flex align-center items-center align-middle content-center" style={{ width: "calc(100% - 2.5rem - 1rem)", top: '50%', transform: 'translate(-50%, -50%)' }}>
         <div className="w-full bg-gray-200 rounded items-center align-middle align-center flex-1 h-2">
-          {isActive ? <Bar fullWidth color='green-300' /> : isNext && <Bar color='green-300' />}
+          {isActive ? <Bar fullWidth color='gray-500' /> : isNext && <Bar color='gray-500' />}
         </div>
       </div>}
-      <div className="w-10 h-10 mx-auto bg-green-500 rounded-full text-lg text-white flex items-center">
+      <div className={"w-10 h-10 mx-auto rounded-full text-lg text-white flex items-center " + (isActive ? 'bg-gray-500' : 'bg-white')}>
         <span className="text-center text-white w-full">
           <svg className="w-full fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"></svg>
-
         </span>
       </div>
     </div>
-
-    {/* <div className="text-xs text-center md:text-base font-title">{text}</div> */}
   </div>
 }
 

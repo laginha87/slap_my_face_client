@@ -27,7 +27,7 @@ export const ReviewStep = ({ state, dispatch }: PropTypes) => {
         right={getSelectedImage(state, 'right')}
       />
       <div className="flex justify-center">
-        <Button onClick={startOver}>Start Over</Button>
+        <Button onClick={startOver} theme="secondary">Start Over</Button>
         <Button onClick={finish} ml='2'>Looks good</Button>
       </div>
     </div>

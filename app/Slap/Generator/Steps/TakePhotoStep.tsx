@@ -78,8 +78,8 @@ export const TakePhotoStep: FC<{ dispatch: Dispatch, state: IState }> = ({ dispa
         {firstPass && <Button onClick={ready}>Ready? </Button>}
         {!done && <div className="text-5xl font-title">{text}</div>}
         {done && <>
-          <Button onClick={tryAgain}>Try Again</Button>
-          <Button onClick={next} ml={2}>Next</Button>
+          <Button onClick={tryAgain} theme='secondary'>Try Again</Button>
+          <Button onClick={next} ml='2'>Next</Button>
         </>}
       </div>
     </div>
