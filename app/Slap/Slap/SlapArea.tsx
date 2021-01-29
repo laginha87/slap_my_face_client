@@ -54,7 +54,7 @@ export const SlapArea: FC<{
       app.addEventListener('mousemove', listener);
 
       return () => {
-        app.style.cursor = "";
+        app.classList.remove('right', 'left');
         app.removeEventListener('mousemove', listener);
       }
     }, []);
