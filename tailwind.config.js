@@ -1,6 +1,9 @@
 module.exports = {
-  purge: [],
   darkMode: false, // or 'media' or 'class'
+  purge: [
+    './index.html',
+    './app/**/*.tsx',
+  ],
   theme: {
     fontFamily: {
       title: ["Potta One", "cursive"],
