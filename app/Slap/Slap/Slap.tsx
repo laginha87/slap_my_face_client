@@ -46,8 +46,8 @@ function useAudio(path): [boolean, HTMLAudioElement] {
   return [isLoading, audio];
 };
 
-export const Slap: FC<{ center: string, left: string, right: string, loading: boolean, name: string, message: string }> = ({
-  center, left, right, name, message, loading
+export const Slap: FC<{ center: string, left: string, right: string, loading?: boolean, name?: string, message?: string, hideCounter: boolean }> = ({
+  center, left, right, name, message, loading, hideCounter
 }) => {
 
   const [isLoadingAudio, audio] = useAudio(slapAudio);
@@ -57,7 +57,7 @@ export const Slap: FC<{ center: string, left: string, right: string, loading: bo
     {isLoading ? <div className="flex justify-center"> <Loading width={640} height={320} />  </div> :
       <>
         <h2 className="text-2xl text-center">{name}</h2>
-        <SlapArea right={right} left={left} center={center} audio={audio} />
+        <SlapArea right={right} left={left} center={center} audio={audio} hideCounter={hideCounter} />
         <div> <div className="px-4 py-2 border-white mt-4 border-t w-96 mx-auto">{message}</div></div>
       </>}
   </>;

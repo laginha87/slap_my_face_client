@@ -38,13 +38,13 @@ export const TakePhotoStep: FC<{ dispatch: Dispatch, state: IState }> = ({ dispa
   const ready = useCallback(async () => {
     setFirstPass(false);
     setText(instructionText);
-    await waitFor(1000);
-    setText(3);
-    await waitFor(1000);
-    setText(2);
-    await waitFor(1000);
-    setText(1);
-    await waitFor(1000);
+    // await waitFor(1000);
+    // setText(3);
+    // await waitFor(1000);
+    // setText(2);
+    // await waitFor(1000);
+    // setText(1);
+    // await waitFor(1000);
     takePic();
     setDone(true);
   }, [instructionText]);
