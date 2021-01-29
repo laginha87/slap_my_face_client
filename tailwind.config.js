@@ -5,7 +5,11 @@ module.exports = {
     fontFamily: {
       title: ["Potta One", "cursive"],
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        width: "width",
+      },
+    },
   },
   variants: {
     extend: {

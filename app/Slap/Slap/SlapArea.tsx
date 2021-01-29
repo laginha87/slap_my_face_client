@@ -1,23 +1,6 @@
 import * as React from 'react';
 import { FC, useCallback, useEffect, useState } from "react";
 
-
-// const useImageDimensions = (path: string) => {
-//   const [dimensions, setDimensions] = useState();
-//   useEffect(() => {
-//     const canvas = document.createElement('canvas');
-//     const img = new Image;
-//     img.src = path;
-//     img.onload = () => {
-//       const ctx = canvas.getContext('2d');
-//       ctx.drawImage(img, 0, 0);
-//       const data = ctx.getImageData(0,0, img.width, img.height);
-//       fo
-//     };
-
-//   }, []);
-// }
-
 export const SlapArea: FC<{
   left: string, right: string, center: string, hideCounter?: boolean, audio: HTMLAudioElement
 }> = ({
@@ -41,7 +24,6 @@ export const SlapArea: FC<{
       },
       [setMouseEnterPos],
     )
-
     const slap = useCallback(
       (e) => {
         e.pageX < mouseEnterPos ? setCurrentImage(left) : setCurrentImage(right);
@@ -62,10 +44,25 @@ export const SlapArea: FC<{
       }
     }, [slapCount]);
 
+    useEffect(() => {
+      const app = document.getElementById('app');
+      const listener = (e) => {
+        const cursor = e.clientX > window.innerWidth / 2 ? 'left' : 'right';
+        app.classList.remove('right', 'left');
+        app.classList.add(cursor);
+      };
+      app.addEventListener('mousemove', listener);
+
+      return () => {
+        app.style.cursor = "";
+        app.removeEventListener('mousemove', listener);
+      }
+    }, []);
+
     return (
       <div>
         <img src={currentImage} className="mx-auto" onMouseEnter={onMouseEnter} onMouseLeave={slap} />
-        {!hideCounter && <div className="text-center">{slapCount}</div>}
+        {!hideCounter && <div className="text-center py-5 text-3xl">{slapCount}</div>}
       </div>
     )
   }

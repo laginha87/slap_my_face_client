@@ -4,6 +4,7 @@ import { Button } from '../../Common/Button';
 import { useS3Client } from '../useS3Client';
 import { Dispatch, getSelectedImage, IState, SIDES, } from '../Reducer'
 import { ProgressBar } from '../../Common/ProgressBar';
+import { Link } from '../../Common/Link';
 
 interface PropTypes {
   dispatch: Dispatch,
@@ -77,7 +78,7 @@ export const UploadStep = ({ state }: PropTypes) => {
             <div className="flex justify-center"><Button type="submit">Generate</Button></div>
           </form> : status == UPLOADING_STATUS ? <ProgressBar value={uploadProgress} total={TOTAL_FILES} /> : <div>
             <div className="text-2xl">
-              All done checkout your link at <a href={`/slap/${hash}`}>here</a>
+              All done checkout your link <Link href={`/slap/${hash}`}>here</Link>
             </div>
           </div>
         }
