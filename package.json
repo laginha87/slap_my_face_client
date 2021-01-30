@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "build-lambda": "parcel build _lambda/segmentPerson.ts --out-dir _lambda/build"
   },
   "keywords": [],
   "author": "",
