@@ -5,10 +5,10 @@
       "app": ["./app/*"]
     },
     "jsx": "react-jsx",
-    "strict": true
-  },
-  "include": [
-    "./app/**/*.ts",
-    "./app/**/*.tsx"
-  ]
+    "strict": true,
+    "target": "es2018",
+    "sourceMap": true,
+    "module": "esnext",
+    "lib": ["esnext"]
+  }
 }

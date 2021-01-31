@@ -44,7 +44,7 @@ const Title: FC<{ step: SlapStep }> = ({ step }) => {
   return <h1 className='text-5xl text-center my-5'>{STEPS_TEXTS[step]}</h1>
 }
 
-export const StartPage = () => {
+const StartPage = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
 
   return (
@@ -58,3 +58,4 @@ export const StartPage = () => {
     </div>
   )
 }
+export default StartPage
