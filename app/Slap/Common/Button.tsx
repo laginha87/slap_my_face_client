@@ -1,8 +1,7 @@
-import * as React from 'react';
+
 import { FC } from 'react'
 
-
-type Theme = 'primary' | 'secondary';
+type Theme = 'primary' | 'secondary'
 
 const CLASSES: { [k in Theme]: string } = {
   primary: 'rounded-sm bg-white hover:text-white hover:border-white border-4 border-black hover:bg-black text-black',
@@ -10,7 +9,7 @@ const CLASSES: { [k in Theme]: string } = {
 }
 
 interface PropTypes extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  ml?: string,
+  ml?: string
   theme?: Theme
 };
 export const Button: FC<PropTypes> = ({ children, ml = '0', theme = 'primary', className: _className, ...args }) => {

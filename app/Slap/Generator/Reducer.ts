@@ -1,65 +1,65 @@
-import { Reducer } from "react";
+import { Reducer } from 'react'
 
-export const INSTRUCTIONS_STEP = "INSTRUCTIONS_STEP";
-export const TAKE_PHOTO_STEP = "TAKE_PHOTO_STEP";
-export const UPLOAD_STEP = "UPLOAD_STEP";
-export const REVIEW_STEP = "REVIEW_STEP";
+export const INSTRUCTIONS_STEP = 'INSTRUCTIONS_STEP'
+export const TAKE_PHOTO_STEP = 'TAKE_PHOTO_STEP'
+export const UPLOAD_STEP = 'UPLOAD_STEP'
+export const REVIEW_STEP = 'REVIEW_STEP'
 
-export type SlapStep = typeof INSTRUCTIONS_STEP | typeof TAKE_PHOTO_STEP | typeof UPLOAD_STEP | typeof REVIEW_STEP;
-export type Side = 'left' | 'right' | 'center';
+export type SlapStep = typeof INSTRUCTIONS_STEP | typeof TAKE_PHOTO_STEP | typeof UPLOAD_STEP | typeof REVIEW_STEP
+export type Side = 'left' | 'right' | 'center'
 
-type ImageMap<T> = {
-  left: T,
-  right: T,
+interface ImageMap<T> {
+  left: T
+  right: T
   center: T
-};
+}
 
-export type TakenImages = ImageMap<string[]>;
-export type SelectedImages = ImageMap<number>;
+export type TakenImages = ImageMap<string[]>
+export type SelectedImages = ImageMap<number>
 export interface IState {
-  step: SlapStep,
-  takenImages: TakenImages,
+  step: SlapStep
+  takenImages: TakenImages
   selectedImages: SelectedImages
 };
 
-export const ADD_IMAGES = "ADD_IMAGES";
+export const ADD_IMAGES = 'ADD_IMAGES'
 
-export function addImagesAction(images, side): AddImagesAction {
-  return { type: ADD_IMAGES, images, side };
+export function addImagesAction (images, side): AddImagesAction {
+  return { type: ADD_IMAGES, images, side }
 }
 
 export interface AddImagesAction {
-  type: typeof ADD_IMAGES,
-  images: string[],
+  type: typeof ADD_IMAGES
+  images: string[]
   side: Side
 }
 
-export const SET_STEP = "SET_STEP";
+export const SET_STEP = 'SET_STEP'
 
-export function setStepAction(step): SetStepAction {
-  return { type: SET_STEP, step };
+export function setStepAction (step): SetStepAction {
+  return { type: SET_STEP, step }
 }
 
 export interface SetStepAction {
-  type: typeof SET_STEP,
+  type: typeof SET_STEP
   step: SlapStep
 }
 
-export const SELECT_IMAGE = "SELECT_IMAGE";
+export const SELECT_IMAGE = 'SELECT_IMAGE'
 
-export function selectImageAction(image, side): SelectImageAction {
-  return { type: SELECT_IMAGE, image, side };
+export function selectImageAction (image, side): SelectImageAction {
+  return { type: SELECT_IMAGE, image, side }
 }
 
 export interface SelectImageAction {
-  type: typeof SELECT_IMAGE,
-  image: string,
+  type: typeof SELECT_IMAGE
+  image: string
   side: Side
 }
 
-type Action = AddImagesAction | SetStepAction | SelectImageAction | ResetImagesAction;
+type Action = AddImagesAction | SetStepAction | SelectImageAction | ResetImagesAction
 
-export type Dispatch = React.Dispatch<Action>;
+export type Dispatch = React.Dispatch<Action>
 
 export const INITIAL_STATE: IState = {
   step: INSTRUCTIONS_STEP,
@@ -67,16 +67,16 @@ export const INITIAL_STATE: IState = {
   takenImages: {
     left: [], right: [], center: []
   }
-};
+}
 
-export const RESET_IMAGES = "RESET_IMAGES";
+export const RESET_IMAGES = 'RESET_IMAGES'
 
-export function resetImagesAction(): ResetImagesAction {
-  return { type: RESET_IMAGES, };
+export function resetImagesAction (): ResetImagesAction {
+  return { type: RESET_IMAGES }
 }
 
 export interface ResetImagesAction {
-  type: typeof RESET_IMAGES,
+  type: typeof RESET_IMAGES
 
 }
 
@@ -92,7 +92,7 @@ export const reducer: Reducer<IState, Action> = (state = INITIAL_STATE, action):
         ...state,
         takenImages: {
           ...state.takenImages,
-          [action.side]: action.images,
+          [action.side]: action.images
         }
       }
     case SELECT_IMAGE:
@@ -109,13 +109,12 @@ export const reducer: Reducer<IState, Action> = (state = INITIAL_STATE, action):
         step: TAKE_PHOTO_STEP
       }
     default:
-      return state;
+      return state
   }
 }
 
 export const getSelectedImage = (state: IState, side: Side) => {
-  return state.takenImages[side][state.selectedImages[side]];
+  return state.takenImages[side][state.selectedImages[side]]
 }
 
-
-export const SIDES: Side[] = ['left', 'right', 'center'];
+export const SIDES: Side[] = ['left', 'right', 'center']

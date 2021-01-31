@@ -1,22 +1,21 @@
-import * as React from 'react'
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react'
 import { Dispatch, getSelectedImage, IState, resetImagesAction, setStepAction, UPLOAD_STEP } from '../Reducer'
-import { Button } from '../../Common/Button';
-import { Slap } from '../../Slap/Slap';
+import { Button } from 'app/Slap/Common/Button'
+import { Slap } from 'app/Slap/Slap/Slap'
 
 interface PropTypes {
-  dispatch: Dispatch,
+  dispatch: Dispatch
   state: IState
 }
 
-export const ReviewStep = ({ state, dispatch }: PropTypes) => {
+export const ReviewStep: FC<PropTypes> = ({ state, dispatch }) => {
   const startOver = useCallback(() => {
-    dispatch(resetImagesAction());
-  }, [dispatch]);
+    dispatch(resetImagesAction())
+  }, [dispatch])
 
   const finish = useCallback(() => {
-    dispatch(setStepAction(UPLOAD_STEP));
-  }, [dispatch]);
+    dispatch(setStepAction(UPLOAD_STEP))
+  }, [dispatch])
 
   return (
     <div>
@@ -26,8 +25,8 @@ export const ReviewStep = ({ state, dispatch }: PropTypes) => {
         left={getSelectedImage(state, 'left')}
         right={getSelectedImage(state, 'right')}
       />
-      <div className="flex justify-center">
-        <Button onClick={startOver} theme="secondary">Start Over</Button>
+      <div className='flex justify-center'>
+        <Button onClick={startOver} theme='secondary'>Start Over</Button>
         <Button onClick={finish} ml='2'>Looks good</Button>
       </div>
     </div>

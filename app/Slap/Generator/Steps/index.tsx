@@ -1,8 +1,7 @@
-import { InstructionsStep } from './InstructionsStep';
-
-import { TakePhotoStep } from "./TakePhotoStep";
-import { UploadStep } from "./UploadStep";
-import { ReviewStep } from "./ReviewStep";
+import { InstructionsStep } from 'app/Slap/Generator/Steps/InstructionsStep'
+import { TakePhotoStep } from 'app/Slap/Generator/Steps/TakePhotoStep'
+import { UploadStep } from 'app/Slap/Generator/Steps/UploadStep'
+import { ReviewStep } from 'app/Slap/Generator/Steps/ReviewStep'
 
 export {
   InstructionsStep,
