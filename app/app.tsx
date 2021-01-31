@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 const StartPage = lazy(() => import('./Slap/Generator/StartPage'))
 
 export const App: FC = () => {
+  throw new Error("Something went wrong");
   return (
     <Suspense fallback={<div>LOADING</div>}>
       <Router>
@@ -16,4 +17,3 @@ export const App: FC = () => {
     </Suspense>
   )
 }
-Rollbar.error('Something went wrong')
