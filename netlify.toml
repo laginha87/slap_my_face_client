@@ -1,3 +1,7 @@
+[build]
+    publish = "dist/"
+    command = "ruby deploy/deploy.rb"
+
 [[redirects]]
     from = '/*'
     to = '/index.html'

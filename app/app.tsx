@@ -16,3 +16,4 @@ export const App: FC = () => {
     </Suspense>
   )
 }
+Rollbar.error('Something went wrong')
