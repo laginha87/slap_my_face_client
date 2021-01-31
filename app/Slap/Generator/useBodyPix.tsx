@@ -52,7 +52,7 @@ export const useBodyPix = (videoRef): {
 
   const loadBodyPix = useCallback(async () => {
     setBodyPix(await load({
-      architecture: 'ResNet50',
+      architecture: 'MobileNetV1',
       outputStride: 16,
       multiplier: 0.75,
       quantBytes: 2
