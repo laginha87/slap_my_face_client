@@ -1,15 +1,29 @@
-
 import { FC, useCallback, useState, useEffect, useRef } from 'react'
 import { Button } from 'app/Slap/Common/Button'
-import { addImagesAction, Dispatch, IState, REVIEW_STEP, setStepAction, Side } from 'app/Slap/Generator/Reducer'
-import { BodyPixSegmenter, useBodyPixContext } from 'app/Slap/Generator/useBodyPix'
+import {
+  addImagesAction,
+  REVIEW_STEP,
+  setStepAction,
+  Side,
+  StepPropTypes
+} from 'app/Slap/Generator/Reducer'
+import {
+  BodyPixSegmenter,
+  useBodyPixContext
+} from 'app/Slap/Generator/useBodyPix'
 import { VIDEO_CONSTRAINTS } from 'app/Slap/Generator/useVideoStream'
 import shutter from 'app/assets/audio/shutter.mp3'
+
+interface SideText {
+  side: Side
+  text: string
+}
 
 const SIDES = [
   { side: 'center', text: 'Look at the camera' },
   { side: 'left', text: 'Look to the right' },
-  { side: 'right', text: 'Look to the left' }] as Array<{ side: Side, text: string }>
+  { side: 'right', text: 'Look to the left' }
+] as SideText[]
 
 const waitFor = async (ms: number): Promise<void> => {
   return await new Promise((resolve) => {
@@ -17,16 +31,18 @@ const waitFor = async (ms: number): Promise<void> => {
   })
 }
 
-export const TakePhotoStep: FC<{ dispatch: Dispatch, state: IState }> = ({ dispatch, state }) => {
+export const TakePhotoStep: FC<StepPropTypes> = ({ dispatch, state }) => {
   const [currentStep, setCurrentStep] = useState(0)
   const audioRef = useRef<HTMLAudioElement>(null)
   const { side, text: instructionText } = SIDES[currentStep]
   const preview = state.takenImages[side][state.selectedImages[side]]
   const { canvasRef } = useBodyPixContext()
 
-  const takePic = useCallback(() => {
+  const takePic = useCallback(async () => {
     dispatch(addImagesAction([canvasRef.current.toDataURL()], side))
-    audioRef?.current?.play()
+    return await (audioRef.current !== null
+      ? audioRef.current.play()
+      : new Promise(() => {}))
   }, [side])
 
   const [firstPass, setFirstPass] = useState(true)
@@ -75,11 +91,16 @@ export const TakePhotoStep: FC<{ dispatch: Dispatch, state: IState }> = ({ dispa
       <div className='absolute z-10 top-0 left-0 w-full h-full flex items-end pb-4 justify-center'>
         {firstPass && <Button onClick={ready}>Ready? </Button>}
         {!done && <div className='text-5xl'>{text}</div>}
-        {done &&
+        {done && (
           <>
-            <Button onClick={tryAgain} theme='secondary'>Try Again</Button>
-            <Button onClick={next} ml='2'>Next</Button>
-          </>}
+            <Button onClick={tryAgain} theme='secondary'>
+              Try Again
+            </Button>
+            <Button onClick={next} ml='2'>
+              Next
+            </Button>
+          </>
+        )}
       </div>
     </div>
   )

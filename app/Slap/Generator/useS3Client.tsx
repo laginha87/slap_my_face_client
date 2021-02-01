@@ -7,7 +7,7 @@ import { dataURItoBlob } from './dataURItoBlob'
 
 export const useS3Client = () => {
   const s3Client = useRef<S3Client>()
-  const hash = useRef<string>()
+  const hash = useRef<string>('')
 
   useEffect(() => {
     hash.current = generateRandomString(40)

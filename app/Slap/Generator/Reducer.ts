@@ -5,7 +5,11 @@ export const TAKE_PHOTO_STEP = 'TAKE_PHOTO_STEP'
 export const UPLOAD_STEP = 'UPLOAD_STEP'
 export const REVIEW_STEP = 'REVIEW_STEP'
 
-export type SlapStep = typeof INSTRUCTIONS_STEP | typeof TAKE_PHOTO_STEP | typeof UPLOAD_STEP | typeof REVIEW_STEP
+export type SlapStep =
+  | typeof INSTRUCTIONS_STEP
+  | typeof TAKE_PHOTO_STEP
+  | typeof UPLOAD_STEP
+  | typeof REVIEW_STEP
 export type Side = 'left' | 'right' | 'center'
 
 interface ImageMap<T> {
@@ -20,11 +24,11 @@ export interface IState {
   step: SlapStep
   takenImages: TakenImages
   selectedImages: SelectedImages
-};
+}
 
 export const ADD_IMAGES = 'ADD_IMAGES'
 
-export function addImagesAction (images, side): AddImagesAction {
+export function addImagesAction(images, side): AddImagesAction {
   return { type: ADD_IMAGES, images, side }
 }
 
@@ -36,7 +40,7 @@ export interface AddImagesAction {
 
 export const SET_STEP = 'SET_STEP'
 
-export function setStepAction (step): SetStepAction {
+export function setStepAction(step): SetStepAction {
   return { type: SET_STEP, step }
 }
 
@@ -47,7 +51,7 @@ export interface SetStepAction {
 
 export const SELECT_IMAGE = 'SELECT_IMAGE'
 
-export function selectImageAction (image, side): SelectImageAction {
+export function selectImageAction(image, side): SelectImageAction {
   return { type: SELECT_IMAGE, image, side }
 }
 
@@ -57,7 +61,11 @@ export interface SelectImageAction {
   side: Side
 }
 
-type Action = AddImagesAction | SetStepAction | SelectImageAction | ResetImagesAction
+type Action =
+  | AddImagesAction
+  | SetStepAction
+  | SelectImageAction
+  | ResetImagesAction
 
 export type Dispatch = React.Dispatch<Action>
 
@@ -65,22 +73,26 @@ export const INITIAL_STATE: IState = {
   step: INSTRUCTIONS_STEP,
   selectedImages: { left: 0, right: 0, center: 0 },
   takenImages: {
-    left: [], right: [], center: []
+    left: [],
+    right: [],
+    center: []
   }
 }
 
 export const RESET_IMAGES = 'RESET_IMAGES'
 
-export function resetImagesAction (): ResetImagesAction {
+export function resetImagesAction(): ResetImagesAction {
   return { type: RESET_IMAGES }
 }
 
 export interface ResetImagesAction {
   type: typeof RESET_IMAGES
-
 }
 
-export const reducer: Reducer<IState, Action> = (state = INITIAL_STATE, action): IState => {
+export const reducer: Reducer<IState, Action> = (
+  state = INITIAL_STATE,
+  action
+): IState => {
   switch (action.type) {
     case SET_STEP:
       return {
@@ -118,3 +130,7 @@ export const getSelectedImage = (state: IState, side: Side) => {
 }
 
 export const SIDES: Side[] = ['left', 'right', 'center']
+export interface StepPropTypes {
+  state: IState
+  dispatch: Dispatch
+}

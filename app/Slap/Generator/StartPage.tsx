@@ -1,39 +1,18 @@
-
-import { FC, useReducer } from 'react'
+import { Loading } from 'app/Slap/Slap/Loading'
+import { FC, lazy, Suspense, useReducer } from 'react'
 
 import {
-  Dispatch,
   INITIAL_STATE,
   INSTRUCTIONS_STEP,
-  IState,
   reducer,
   REVIEW_STEP,
   SlapStep,
   TAKE_PHOTO_STEP,
   UPLOAD_STEP
-} from './Reducer'
-import { StepCounter } from './StepCounter'
-import { InstructionsStep, ReviewStep, UploadStep } from './Steps'
-import { TakePhotoStep } from './Steps/TakePhotoStep'
-import { BodyPixProvider } from './useBodyPix'
+} from 'app/Slap/Generator/Reducer'
+import { StepCounter } from 'app/Slap/Generator/StepCounter'
 
-const Step: FC<{ state: IState, dispatch: Dispatch }> = ({ state, dispatch }) => {
-  switch (state.step) {
-    case INSTRUCTIONS_STEP:
-      return <InstructionsStep dispatch={dispatch} />
-    case TAKE_PHOTO_STEP:
-      return <TakePhotoStep dispatch={dispatch} state={state} />
-    case UPLOAD_STEP:
-      return <UploadStep dispatch={dispatch} state={state} />
-    case REVIEW_STEP:
-      return <ReviewStep dispatch={dispatch} state={state} />
-    default:
-      return <div />
-  };
-}
-
-const STEPS_TEXTS =
-{
+const STEPS_TEXTS = {
   [INSTRUCTIONS_STEP]: 'Instructions',
   [TAKE_PHOTO_STEP]: 'Take Photos',
   [REVIEW_STEP]: 'Review',
@@ -44,18 +23,20 @@ const Title: FC<{ step: SlapStep }> = ({ step }) => {
   return <h1 className='text-5xl text-center my-5'>{STEPS_TEXTS[step]}</h1>
 }
 
-const StartPage = () => {
+const Step = lazy(async () => await import('app/Slap/Generator/Step'))
+
+export const StartPage: FC = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
 
   return (
     <div className='mx-auto container'>
       <h1 className='text-4xl text-center'>Slap My Face</h1>
-      <BodyPixProvider>
-        <StepCounter step={state.step} />
-        <Title step={state.step} />
+
+      <StepCounter step={state.step} />
+      <Title step={state.step} />
+      <Suspense fallback={<Loading width={640} height={320} />}>
         <Step state={state} dispatch={dispatch} />
-      </BodyPixProvider>
+      </Suspense>
     </div>
   )
 }
-export default StartPage

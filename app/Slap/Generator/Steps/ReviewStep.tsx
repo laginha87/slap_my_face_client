@@ -1,14 +1,15 @@
 import { FC, useCallback } from 'react'
-import { Dispatch, getSelectedImage, IState, resetImagesAction, setStepAction, UPLOAD_STEP } from '../Reducer'
+import {
+  getSelectedImage,
+  resetImagesAction,
+  setStepAction,
+  StepPropTypes,
+  UPLOAD_STEP
+} from 'app/Slap/Generator/Reducer'
 import { Button } from 'app/Slap/Common/Button'
 import { Slap } from 'app/Slap/Slap/Slap'
 
-interface PropTypes {
-  dispatch: Dispatch
-  state: IState
-}
-
-export const ReviewStep: FC<PropTypes> = ({ state, dispatch }) => {
+export const ReviewStep: FC<StepPropTypes> = ({ state, dispatch }) => {
   const startOver = useCallback(() => {
     dispatch(resetImagesAction())
   }, [dispatch])
@@ -26,8 +27,12 @@ export const ReviewStep: FC<PropTypes> = ({ state, dispatch }) => {
         right={getSelectedImage(state, 'right')}
       />
       <div className='flex justify-center'>
-        <Button onClick={startOver} theme='secondary'>Start Over</Button>
-        <Button onClick={finish} ml='2'>Looks good</Button>
+        <Button onClick={startOver} theme='secondary'>
+          Start Over
+        </Button>
+        <Button onClick={finish} ml='2'>
+          Looks good
+        </Button>
       </div>
     </div>
   )
