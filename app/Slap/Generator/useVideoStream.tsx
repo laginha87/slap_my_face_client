@@ -13,7 +13,7 @@ const constraints = {
 
 export const useVideoStream: () => [React.MutableRefObject<HTMLVideoElement>, () => void] = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  throw new Error("Something went wrong");
+
   const videoPlay = useCallback(
     () => {
       videoRef.current.play()
