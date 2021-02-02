@@ -3,10 +3,16 @@ import { SlapArea } from 'app/Slap/SlapArea'
 import { useAudio } from 'app/Slap/useAudio'
 import { useImages } from 'app/Slap/useImage'
 import { WithLoading } from 'app/Slap/Loading'
-// import { MouseControlled } from 'app/Slap/MouseControlled'
 import { TouchControlled } from 'app/Slap/TouchControlled'
+import { MouseControlled } from 'app/Slap/MouseControlled'
+import { IS_DESKTOP } from 'app/Utils/isDesktop'
 
-const LoadingSlapArea = WithLoading(TouchControlled(SlapArea), 640, 320)
+const LoadingSlapArea = WithLoading(
+  (IS_DESKTOP ? MouseControlled : TouchControlled)(SlapArea),
+  640,
+  320
+)
+
 const useCounter = (): [number, () => void] => {
   const [counter, setCounter] = useState(0)
   const incCounter = useCallback(() => {
