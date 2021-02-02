@@ -7,16 +7,16 @@ import {
   SlapStep,
   TAKE_PHOTO_STEP,
   UPLOAD_STEP
-} from 'app/Slap/Generator/Reducer'
+} from 'app/Generator/Reducer'
 
 import {
   InstructionsStep,
   ReviewStep,
   UploadStep,
   TakePhotoStep
-} from 'app/Slap/Generator/Steps'
+} from 'app/Generator/Steps'
 
-import { BodyPixProvider } from 'app/Slap/Generator/useBodyPix'
+import { BodyPixProvider } from 'app/Services/Tensorflow'
 
 const STEPS: { [k in SlapStep]: FC<StepPropTypes> } = {
   [INSTRUCTIONS_STEP]: InstructionsStep,

@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { ButtonWithSpinner } from 'app/Slap/Common/Button'
-import { TAKE_PHOTO_STEP, StepPropTypes } from 'app/Slap/Generator/Reducer'
-import { useBodyPixContext } from 'app/Slap/Generator/useBodyPix'
-import { useStep } from 'app/Slap/Generator/useStep'
-import { VIDEO_CONSTRAINTS } from 'app/Slap/Generator/useVideoStream'
+import { ButtonWithSpinner } from 'app/Common/Button'
+import { TAKE_PHOTO_STEP, StepPropTypes } from 'app/Generator/Reducer'
+import { useBodyPixContext } from 'app/Services/Tensorflow'
+import { useStep } from 'app/Generator/useStep'
+import { VIDEO_CONSTRAINTS } from 'app/Generator/useVideoStream'
 
 export const InstructionsStep: FC<StepPropTypes> = ({ dispatch }) => {
   const { isLoaded } = useBodyPixContext()

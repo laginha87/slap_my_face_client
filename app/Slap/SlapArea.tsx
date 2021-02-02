@@ -1,4 +1,3 @@
-
 import { FC, useCallback, useEffect, useState } from 'react'
 
 interface PropTypes {
@@ -10,7 +9,11 @@ interface PropTypes {
 }
 
 export const SlapArea: FC<PropTypes> = ({
-  left, right, center, hideCounter = false, audio
+  left,
+  right,
+  center,
+  hideCounter = false,
+  audio
 }) => {
   const [currentImage, setCurrentImage] = useState(center)
   const [mouseEnterPos, setMouseEnterPos] = useState(0)
@@ -21,7 +24,11 @@ export const SlapArea: FC<PropTypes> = ({
   const [audioSources, setAudioSources] = useState<HTMLAudioElement[]>([])
 
   useEffect(() => {
-    setAudioSources(Array(100).fill(undefined).map(() => new Audio(audio.src)))
+    setAudioSources(
+      Array(100)
+        .fill(undefined)
+        .map(() => new Audio(audio.src))
+    )
   }, [])
 
   const onMouseEnter = useCallback(
@@ -50,12 +57,12 @@ export const SlapArea: FC<PropTypes> = ({
   }, [slapCount])
 
   useEffect(() => {
-    const app = document.getElementById('app')
-    const listener = (e) => {
+    const app = document.getElementById('app') as HTMLDivElement
+    const listener = (e: MouseEvent): void => {
       const cursor = e.clientX > window.innerWidth / 2 ? 'left' : 'right'
       app.classList.remove('right', 'left')
       app.classList.add(cursor)
-    };
+    }
     app.addEventListener('mousemove', listener)
 
     return () => {
@@ -66,8 +73,15 @@ export const SlapArea: FC<PropTypes> = ({
 
   return (
     <div>
-      <img src={currentImage} className='mx-auto' onMouseEnter={onMouseEnter} onMouseLeave={slap} />
-      {!hideCounter && <div className='text-center py-5 text-3xl'>{slapCount}</div>}
+      <img
+        src={currentImage}
+        className='mx-auto'
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={slap}
+      />
+      {!hideCounter && (
+        <div className='text-center py-5 text-3xl'>{slapCount}</div>
+      )}
     </div>
   )
 }

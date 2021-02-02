@@ -5,9 +5,9 @@ import {
   setStepAction,
   StepPropTypes,
   UPLOAD_STEP
-} from 'app/Slap/Generator/Reducer'
-import { Button } from 'app/Slap/Common/Button'
-import { Slap } from 'app/Slap/Slap/Slap'
+} from 'app/Generator/Reducer'
+import { Button } from 'app/Common/Button'
+import { Slap } from 'app/Slap/Slap'
 
 export const ReviewStep: FC<StepPropTypes> = ({ state, dispatch }) => {
   const startOver = useCallback(() => {

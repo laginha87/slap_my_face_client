@@ -1,11 +1,9 @@
 import { SyntheticEvent, useCallback, useState, FC } from 'react'
-import { Button, ProgressBar, Link, Input, Textarea } from 'app/Slap/Common'
-import { useS3Client } from 'app/Slap/Generator/useS3Client'
-import {
-  getSelectedImage,
-  SIDES,
-  StepPropTypes
-} from 'app/Slap/Generator/Reducer'
+import { Button, ProgressBar, Link, Input, Textarea } from 'app/Common'
+import { generateS3Client, generatePath, uploadFile } from 'app/Services/S3'
+
+import { getSelectedImage, SIDES, StepPropTypes } from 'app/Generator/Reducer'
+import { useId } from 'app/Hooks/useId'
 
 const UPLOADED_STATUS = 'UPLOADED_STATUS'
 const UPLOADING_STATUS = 'UPLOADING_STATUS'
@@ -14,8 +12,8 @@ const TOTAL_FILES = 5
 
 export const UploadStep: FC<StepPropTypes> = ({ state }) => {
   const [status, setStatus] = useState(FORM_STATUS)
-
-  const { uploadPublicImage, uploadJsonFile, hash } = useS3Client()
+  const [s3Client] = useState(generateS3Client)
+  const slapId = useId()
   const [uploadProgress, setUploadProgress] = useState(0)
 
   const upload = useCallback(
@@ -26,21 +24,35 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
 
       const imageUploads = SIDES.map(async (e) => {
         const img = getSelectedImage(state, e)
-        return await uploadPublicImage(e, img)
+        return await uploadFile(
+          s3Client,
+          img,
+          generatePath(slapId, e),
+          'image',
+          false
+        )
       })
 
       const fileUploads = [
-        uploadJsonFile(
-          'public',
+        uploadFile(
+          s3Client,
           {
             message: formData.get('message'),
             name: formData.get('name')
           },
-          'public-read'
+          generatePath(slapId, 'public'),
+          'json',
+          false
         ),
-        uploadJsonFile('private', {
-          email: formData.get('email')
-        })
+        uploadFile(
+          s3Client,
+          {
+            email: formData.get('email')
+          },
+          generatePath(slapId, 'private'),
+          'json',
+          true
+        )
       ]
       const promises = [...imageUploads, ...fileUploads].map(async (e) => {
         await e
@@ -76,7 +88,7 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
           <div>
             <div className='text-2xl'>
               All done checkout your link{' '}
-              <Link href={`/slap/${hash}`}>here</Link>
+              <Link href={`/slap/${slapId}`}>here</Link>
             </div>
           </div>
         )}

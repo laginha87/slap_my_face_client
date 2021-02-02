@@ -1,5 +1,6 @@
-export function generateRandomString (length: number) {
-  var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+export function generateRandomString (length: number): string {
+  var randomChars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   var result = ''
   for (var i = 0; i < length; i++) {
     result += randomChars.charAt(Math.floor(Math.random() * randomChars.length))

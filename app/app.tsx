@@ -1,7 +1,7 @@
-import { StartPage } from 'app/Slap/Generator/StartPage'
-import { Components } from 'app/Slap/Common/Components'
-import { SlapPage } from 'app/Slap/Slap/Page'
-import { FC, lazy } from 'react'
+import { StartPage } from 'app/Generator/StartPage'
+import { Components } from 'app/Common/Components'
+import { SlapPage } from 'app/Slap/Page'
+import { FC } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 export const App: FC = () => {

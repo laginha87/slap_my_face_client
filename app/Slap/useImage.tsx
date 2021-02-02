@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export function useImage(path: string): boolean {
+export function useImage (path: string): boolean {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {

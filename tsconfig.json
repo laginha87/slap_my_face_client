@@ -9,6 +9,7 @@
     "target": "es2018",
     "sourceMap": true,
     "module": "esnext",
+    "moduleResolution": "Node",
     "lib": ["esnext", "DOM"]
   }
 }

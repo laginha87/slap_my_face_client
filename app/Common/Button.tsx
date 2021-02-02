@@ -1,4 +1,4 @@
-import { Spinner } from 'app/Slap/Common/Spinner'
+import { Spinner } from 'app/Common/Spinner'
 import { FC } from 'react'
 
 type Theme = 'primary' | 'secondary'

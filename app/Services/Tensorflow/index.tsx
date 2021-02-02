@@ -3,7 +3,7 @@ import '@tensorflow/tfjs-backend-webgl'
 import '@tensorflow/tfjs-backend-cpu'
 import { MutableRefObject, useContext, useRef, createContext, useCallback, useEffect, useState } from 'react'
 
-import { useVideoStream, VIDEO_CONSTRAINTS } from './useVideoStream'
+import { useVideoStream, VIDEO_CONSTRAINTS } from 'app/Generator/useVideoStream'
 
 const BodyPixContext = createContext<{
   bodyPix: BodyPix

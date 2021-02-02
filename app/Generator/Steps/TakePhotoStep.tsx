@@ -1,18 +1,15 @@
-import { FC, useCallback, useState, useEffect, useRef } from 'react'
-import { Button } from 'app/Slap/Common/Button'
+import { FC, useCallback, useState, useEffect } from 'react'
+import { Button } from 'app/Common/Button'
 import {
   addImagesAction,
   REVIEW_STEP,
   setStepAction,
   Side,
   StepPropTypes
-} from 'app/Slap/Generator/Reducer'
-import {
-  BodyPixSegmenter,
-  useBodyPixContext
-} from 'app/Slap/Generator/useBodyPix'
-import { VIDEO_CONSTRAINTS } from 'app/Slap/Generator/useVideoStream'
-import shutter from 'app/assets/audio/shutter.mp3'
+} from 'app/Generator/Reducer'
+import { BodyPixSegmenter, useBodyPixContext } from 'app/Services/Tensorflow'
+import { VIDEO_CONSTRAINTS } from 'app/Generator/useVideoStream'
+import { useAudio } from 'app/Slap/useAudio'
 
 interface SideText {
   side: Side
@@ -33,15 +30,15 @@ const waitFor = async (ms: number): Promise<void> => {
 
 export const TakePhotoStep: FC<StepPropTypes> = ({ dispatch, state }) => {
   const [currentStep, setCurrentStep] = useState(0)
-  const audioRef = useRef<HTMLAudioElement>(null)
+  const [, shutterAudio] = useAudio('shutter')
   const { side, text: instructionText } = SIDES[currentStep]
   const preview = state.takenImages[side][state.selectedImages[side]]
   const { canvasRef } = useBodyPixContext()
 
   const takePic = useCallback(async () => {
     dispatch(addImagesAction([canvasRef.current.toDataURL()], side))
-    return await (audioRef.current !== null
-      ? audioRef.current.play()
+    return await (shutterAudio !== null
+      ? shutterAudio.play()
       : new Promise(() => {}))
   }, [side])
 
@@ -84,7 +81,6 @@ export const TakePhotoStep: FC<StepPropTypes> = ({ dispatch, state }) => {
   }, [currentStep])
   return (
     <div>
-      <audio src={shutter} ref={audioRef} />
       <div className='mx-auto' style={VIDEO_CONSTRAINTS}>
         <BodyPixSegmenter enabled={!done} preview={preview} />
       </div>

@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { INSTRUCTIONS_STEP, REVIEW_STEP, SlapStep, TAKE_PHOTO_STEP, UPLOAD_STEP } from 'app/Slap/Generator/Reducer'
+import { INSTRUCTIONS_STEP, REVIEW_STEP, SlapStep, TAKE_PHOTO_STEP, UPLOAD_STEP } from 'app/Generator/Reducer'
 
 const STEPS = [
   INSTRUCTIONS_STEP,

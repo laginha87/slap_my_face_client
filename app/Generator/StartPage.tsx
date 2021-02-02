@@ -1,4 +1,4 @@
-import { Loading } from 'app/Slap/Slap/Loading'
+import { Loading } from 'app/Slap/Loading'
 import { FC, lazy, Suspense, useReducer } from 'react'
 
 import {
@@ -9,8 +9,8 @@ import {
   SlapStep,
   TAKE_PHOTO_STEP,
   UPLOAD_STEP
-} from 'app/Slap/Generator/Reducer'
-import { StepCounter } from 'app/Slap/Generator/StepCounter'
+} from 'app/Generator/Reducer'
+import { StepCounter } from 'app/Generator/StepCounter'
 
 const STEPS_TEXTS = {
   [INSTRUCTIONS_STEP]: 'Instructions',
@@ -23,7 +23,7 @@ const Title: FC<{ step: SlapStep }> = ({ step }) => {
   return <h1 className='text-5xl text-center my-5'>{STEPS_TEXTS[step]}</h1>
 }
 
-const Step = lazy(async () => await import('app/Slap/Generator/Step'))
+const Step = lazy(async () => await import('app/Generator/Step'))
 
 export const StartPage: FC = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
