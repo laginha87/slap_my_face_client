@@ -1,87 +1,59 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
-interface PropTypes {
+export interface SlapAreaPropTypes {
   left: string
   right: string
   center: string
-  hideCounter?: boolean
-  audio: HTMLAudioElement
+  side: 'left' | 'right' | 'center'
+  slapped: () => void
 }
 
-export const SlapArea: FC<PropTypes> = ({
-  left,
-  right,
-  center,
-  hideCounter = false,
-  audio
+export const SlapArea: FC<SlapAreaPropTypes> = ({
+  side,
+  slapped,
+  ...props
 }) => {
-  const [currentImage, setCurrentImage] = useState(center)
-  const [mouseEnterPos, setMouseEnterPos] = useState(0)
-  const [slapCount, setSlapCount] = useState(0)
+  const [currentImage, setCurrentImage] = useState(props.center)
+  // const [mouseEnterPos, setMouseEnterPos] = useState(0)
+  // const [slapCount, setSlapCount] = useState(0)
 
-  const [audioIndex, setAudioIndex] = useState(0)
+  // const [audioIndex, setAudioIndex] = useState(0)
 
-  const [audioSources, setAudioSources] = useState<HTMLAudioElement[]>([])
+  // const [audioSources, setAudioSources] = useState<HTMLAudioElement[]>([])
 
-  useEffect(() => {
-    setAudioSources(
-      Array(100)
-        .fill(undefined)
-        .map(() => new Audio(audio.src))
-    )
-  }, [])
+  // useEffect(() => {
+  //   setAudioSources(
+  //     Array(100)
+  //       .fill(undefined)
+  //       .map(() => new Audio(audio.src))
+  //   )
+  // }, [])
 
-  const onMouseEnter = useCallback(
-    (e) => {
-      setMouseEnterPos(e.pageX)
-    },
-    [setMouseEnterPos]
-  )
-  const slap = useCallback(
-    (e) => {
-      e.pageX < mouseEnterPos ? setCurrentImage(left) : setCurrentImage(right)
-      audioSources[audioIndex].play()
-      setAudioIndex((n) => (n + 1) % audioSources.length)
-      setSlapCount((s) => s + 1)
-    },
-    [mouseEnterPos, setCurrentImage]
-  )
+  // const onMouseEnter = useCallback(
+  //   (e) => {
+  //     setMouseEnterPos(e.pageX)
+  //   },
+  //   [setMouseEnterPos]
+  // )
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setCurrentImage(center)
-    }, 400)
-    return () => {
-      clearTimeout(timeout)
-    }
-  }, [slapCount])
+  // const slap = useCallback(
+  //   (e) => {
+  //     e.pageX < mouseEnterPos ? setCurrentImage(left) : setCurrentImage(right)
+  //     audioSources[audioIndex].play()
+  //     setAudioIndex((n) => (n + 1) % audioSources.length)
+  //     setSlapCount((s) => s + 1)
+  //   },
+  //   [mouseEnterPos, setCurrentImage]
+  // )
 
   useEffect(() => {
-    const app = document.getElementById('app') as HTMLDivElement
-    const listener = (e: MouseEvent): void => {
-      const cursor = e.clientX > window.innerWidth / 2 ? 'left' : 'right'
-      app.classList.remove('right', 'left')
-      app.classList.add(cursor)
-    }
-    app.addEventListener('mousemove', listener)
-
-    return () => {
-      app.classList.remove('right', 'left')
-      app.removeEventListener('mousemove', listener)
-    }
-  }, [])
+    setCurrentImage(props[side])
+    side !== 'center' && slapped()
+  }, [side])
 
   return (
     <div>
-      <img
-        src={currentImage}
-        className='mx-auto'
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={slap}
-      />
-      {!hideCounter && (
-        <div className='text-center py-5 text-3xl'>{slapCount}</div>
-      )}
+      <img src={currentImage} className='mx-auto' />
     </div>
   )
 }

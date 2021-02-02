@@ -1,9 +1,11 @@
 import { FC, useEffect, useState } from 'react'
 
-export const Loading: FC<{ width: number, height: number }> = ({
-  width,
-  height
-}) => {
+interface LoadingProps {
+  width: number
+  height: number
+}
+
+export const Loading: FC<LoadingProps> = ({ width, height }) => {
   const [loadtext, setLoadtext] = useState('.')
 
   useEffect(() => {
@@ -26,4 +28,24 @@ export const Loading: FC<{ width: number, height: number }> = ({
       </div>
     </div>
   )
+}
+
+export type LoadableComponent<T> = FC<T & { loading: boolean }>
+
+export function WithLoading<T = {}> (
+  Fc: FC<T>,
+  width: number,
+  height: number
+): LoadableComponent<T> {
+  return ({ loading, ...props }) => {
+    if (loading) {
+      return (
+        <div className='flex justify-center'>
+          <Loading width={width} height={height} />
+        </div>
+      )
+    } else {
+      return <Fc {...(props as T)} />
+    }
+  }
 }

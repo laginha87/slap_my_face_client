@@ -13,7 +13,6 @@ export const SlapPage: FC = () => {
   return (
     <div>
       <h1 className='text-4xl text-center'>Slap My Face</h1>
-
       <Slap
         loading={loading}
         left={buildS3Url(`${id}/left`)}
