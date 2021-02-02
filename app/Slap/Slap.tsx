@@ -3,15 +3,15 @@ import { SlapArea } from 'app/Slap/SlapArea'
 import { useAudio } from 'app/Slap/useAudio'
 import { useImages } from 'app/Slap/useImage'
 import { WithLoading } from 'app/Slap/Loading'
-import { MouseControlled } from 'app/Slap/MouseControlled'
-import { input } from '@tensorflow/tfjs'
+// import { MouseControlled } from 'app/Slap/MouseControlled'
+import { TouchControlled } from 'app/Slap/TouchControlled'
 
-const LoadingSlapArea = WithLoading(MouseControlled(SlapArea), 640, 320)
+const LoadingSlapArea = WithLoading(TouchControlled(SlapArea), 640, 320)
 const useCounter = (): [number, () => void] => {
   const [counter, setCounter] = useState(0)
   const incCounter = useCallback(() => {
     setCounter((e) => e + 1)
-  }, [input])
+  }, [])
   return [counter, incCounter]
 }
 export const Slap: FC<{
