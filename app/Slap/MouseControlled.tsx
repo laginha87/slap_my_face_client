@@ -2,10 +2,9 @@ import { FC, useCallback, useState, MouseEvent, useEffect } from 'react'
 import { SlapAreaPropTypes } from 'app/Slap/SlapArea'
 import { useSlap } from 'app/Slap/useSlap'
 
-export const MouseControlled = (Fc: FC<SlapAreaPropTypes>) => ({
-  side: _side,
-  ...props
-}: SlapAreaPropTypes) => {
+export const MouseControlled = (
+  Fc: FC<SlapAreaPropTypes & { loading: true }>
+) => ({ side: _side, ...props }: SlapAreaPropTypes) => {
   const [mouseEnterPos, setMouseEnterPos] = useState(0)
   const [side, setSide] = useSlap()
 

@@ -2,10 +2,9 @@ import { FC, useCallback, useState, TouchEvent } from 'react'
 import { SlapAreaPropTypes } from 'app/Slap/SlapArea'
 import { useSlap } from 'app/Slap/useSlap'
 
-export const TouchControlled = (Fc: FC<SlapAreaPropTypes>) => ({
-  side: _side,
-  ...props
-}: SlapAreaPropTypes) => {
+export const TouchControlled = (
+  Fc: FC<SlapAreaPropTypes & { loading: true }>
+) => ({ side: _side, ...props }: SlapAreaPropTypes) => {
   const [touchStartPos, setTouchStartPos] = useState(0)
   const [side, setSide] = useSlap()
 
