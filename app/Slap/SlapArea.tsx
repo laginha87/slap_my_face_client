@@ -5,12 +5,12 @@ export interface SlapAreaPropTypes {
   right: string
   center: string
   side?: 'left' | 'right' | 'center'
-  slapped: () => void
+  slapped?: () => void
 }
 
 export const SlapArea: FC<SlapAreaPropTypes> = ({
   side = 'center',
-  slapped,
+  slapped = () => {},
   ...props
 }) => {
   const [currentImage, setCurrentImage] = useState(props.center)

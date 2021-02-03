@@ -32,20 +32,17 @@ export const Loading: FC<LoadingProps> = ({ width, height }) => {
 
 export type LoadableComponent<T> = FC<T & { loading: boolean }>
 
-export function WithLoading<T = {}> (
-  Fc: FC<T>,
+export const WithLoading = <T extends {} = {}>(
   width: number,
   height: number
-): LoadableComponent<T> {
-  return ({ loading, ...props }) => {
-    if (loading) {
-      return (
-        <div className='flex justify-center'>
-          <Loading width={width} height={height} />
-        </div>
-      )
-    } else {
-      return <Fc {...(props as T)} />
-    }
+) => (Fc: FC<T>): LoadableComponent<T> => ({ loading, ...props }) => {
+  if (loading) {
+    return (
+      <div className='flex justify-center'>
+        <Loading width={width} height={height} />
+      </div>
+    )
+  } else {
+    return <Fc {...(props as T)} />
   }
 }

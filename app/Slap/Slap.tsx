@@ -8,10 +8,15 @@ import { IS_DESKTOP } from 'app/Utils/isDesktop'
 import { useCounter } from 'app/Slap/useCounter'
 import { WithAudio } from 'app/Slap/WithAudio'
 
-const LoadingSlapArea = WithAudio(
-  (IS_DESKTOP ? MouseControlled : TouchControlled)(
-    WithLoading(SlapArea, 640, 320)
-  )
+import { compose } from 'lodash/fp'
+import { ColLayout } from 'app/Common/Layouts'
+import { Title } from 'app/Common/Typography'
+
+const LoadingSlapArea = compose(
+  WithAudio,
+  IS_DESKTOP ? MouseControlled : TouchControlled,
+  WithLoading(640, 320))(
+  SlapArea
 )
 
 export const Slap: FC<{
@@ -26,8 +31,8 @@ export const Slap: FC<{
   const [counter, incCounter] = useCounter()
 
   return (
-    <div className='flex flex-col justify-center items-center'>
-      <h2 className='text-2xl'>{name}</h2>
+    <ColLayout>
+      <Title>{name}</Title>
       <LoadingSlapArea
         right={right}
         left={left}
@@ -37,6 +42,6 @@ export const Slap: FC<{
       />
       <div className='py-5 text-3xl'>{counter}</div>
       <div className='px-4 py-2 border-white mt-4 border-t w-96'>{message}</div>
-    </div>
+    </ColLayout>
   )
 }

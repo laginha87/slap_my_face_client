@@ -24,11 +24,13 @@ export interface IState {
   step: SlapStep
   takenImages: TakenImages
   selectedImages: SelectedImages
+  name: string
+  message: string
 }
 
 export const ADD_IMAGES = 'ADD_IMAGES'
 
-export function addImagesAction (images: string[], side: Side): AddImagesAction {
+export function addImagesAction(images: string[], side: Side): AddImagesAction {
   return { type: ADD_IMAGES, images, side }
 }
 
@@ -40,7 +42,7 @@ export interface AddImagesAction {
 
 export const SET_STEP = 'SET_STEP'
 
-export function setStepAction (step: SlapStep): SetStepAction {
+export function setStepAction(step: SlapStep): SetStepAction {
   return { type: SET_STEP, step }
 }
 
@@ -51,7 +53,7 @@ export interface SetStepAction {
 
 export const SELECT_IMAGE = 'SELECT_IMAGE'
 
-export function selectImageAction (
+export function selectImageAction(
   image: string,
   side: Side
 ): SelectImageAction {
@@ -69,6 +71,7 @@ type Action =
   | SetStepAction
   | SelectImageAction
   | ResetImagesAction
+  | SetTextElementsAction
 
 export type Dispatch = React.Dispatch<Action>
 
@@ -79,12 +82,14 @@ export const INITIAL_STATE: IState = {
     left: [],
     right: [],
     center: []
-  }
+  },
+  name: '',
+  message: ''
 }
 
 export const RESET_IMAGES = 'RESET_IMAGES'
 
-export function resetImagesAction (): ResetImagesAction {
+export function resetImagesAction(): ResetImagesAction {
   return { type: RESET_IMAGES }
 }
 
@@ -92,10 +97,22 @@ export interface ResetImagesAction {
   type: typeof RESET_IMAGES
 }
 
-export const reducer: Reducer<IState, Action> = (
-  state,
-  action
-): IState => {
+export const SET_TEXT_ELEMENTS = 'SET_TEXT_ELEMENTS'
+
+export function setTextElementsAction(
+  name: string,
+  message: string
+): SetTextElementsAction {
+  return { type: SET_TEXT_ELEMENTS, name, message }
+}
+
+export interface SetTextElementsAction {
+  type: typeof SET_TEXT_ELEMENTS
+  name: string
+  message: string
+}
+
+export const reducer: Reducer<IState, Action> = (state, action): IState => {
   switch (action.type) {
     case SET_STEP:
       return {
@@ -121,7 +138,19 @@ export const reducer: Reducer<IState, Action> = (
     case RESET_IMAGES:
       return {
         ...INITIAL_STATE,
+        takenImages: {
+          left: [],
+          right: [],
+          center: []
+        },
         step: TAKE_PHOTO_STEP
+      }
+    case SET_TEXT_ELEMENTS:
+      return {
+        ...state,
+        name: action.name,
+        message: action.message,
+        step: UPLOAD_STEP
       }
     default:
       return state

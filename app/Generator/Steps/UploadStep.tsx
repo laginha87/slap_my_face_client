@@ -1,9 +1,10 @@
-import { SyntheticEvent, useCallback, useState, FC } from 'react'
-import { Button, ProgressBar, Link, Input, Textarea } from 'app/Common'
+import { useCallback, useState, FC } from 'react'
+import { ProgressBar, Link } from 'app/Common'
 import { generateS3Client, generatePath, uploadFile } from 'app/Services/S3'
 
 import { getSelectedImage, SIDES, StepPropTypes } from 'app/Generator/Reducer'
 import { useId } from 'app/Hooks/useId'
+import { UploadForm } from 'app/Generator/Steps/UploadForm'
 
 const UPLOADED_STATUS = 'UPLOADED_STATUS'
 const UPLOADING_STATUS = 'UPLOADING_STATUS'
@@ -17,11 +18,9 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
   const [uploadProgress, setUploadProgress] = useState(0)
 
   const upload = useCallback(
-    async (e: SyntheticEvent) => {
-      e.preventDefault()
-      const formData = new FormData(e.target as HTMLFormElement)
+    async ({ email }) => {
+      const { name, message } = state
       setStatus(UPLOADING_STATUS)
-
       const imageUploads = SIDES.map(async (e) => {
         const img = getSelectedImage(state, e)
         return await uploadFile(
@@ -37,8 +36,8 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
         uploadFile(
           s3Client,
           {
-            message: formData.get('message'),
-            name: formData.get('name')
+            message,
+            name
           },
           generatePath(slapId, 'public'),
           'json',
@@ -47,7 +46,7 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
         uploadFile(
           s3Client,
           {
-            email: formData.get('email')
+            email
           },
           generatePath(slapId, 'private'),
           'json',
@@ -69,19 +68,7 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
     <div className='mx-auto px-5'>
       <div className='w-full lg:w-1/2 mx-auto'>
         {status === FORM_STATUS ? (
-          <form onSubmit={upload}>
-            <Input name='email' label='Email' className='mb-4' type='email' />
-            <Input name='name' label='Name' className='mb-4' />
-            <Input
-              name='message'
-              label='Message'
-              Component={Textarea}
-              className='mb-8'
-            />
-            <div className='flex justify-center'>
-              <Button type='submit'>Generate</Button>
-            </div>
-          </form>
+          <UploadForm onSubmit={upload} />
         ) : status === UPLOADING_STATUS ? (
           <ProgressBar value={uploadProgress} total={TOTAL_FILES} />
         ) : (

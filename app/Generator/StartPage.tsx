@@ -16,7 +16,7 @@ const STEPS_TEXTS = {
   [INSTRUCTIONS_STEP]: 'Instructions',
   [TAKE_PHOTO_STEP]: 'Take Photos',
   [REVIEW_STEP]: 'Review',
-  [UPLOAD_STEP]: 'Generate'
+  [UPLOAD_STEP]: 'Almost done'
 }
 
 const Title: FC<{ step: SlapStep }> = ({ step }) => {
