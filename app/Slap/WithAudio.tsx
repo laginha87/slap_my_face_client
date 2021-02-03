@@ -9,7 +9,7 @@ export const WithAudio = (
   loading,
   ...props
 }: SlapAreaPropTypes & { loading: boolean }) => {
-  const [audioLoading, audio] = useAudio('slap')
+  const [, audio] = useAudio('slap')
   const [audioIndex, setAudioIndex] = useState(0)
   const [audioSources, setAudioSources] = useState<HTMLAudioElement[]>([])
 
@@ -26,7 +26,16 @@ export const WithAudio = (
     setAudioIndex((n) => (n + 1) % audioSources.length)
   }, [audioSources, audioIndex])
 
-  return (
-    <Fc slapped={newSlapped} loading={loading || audioLoading} {...props} />
-  )
+  // Audio on ios just sucks
+  useEffect(() => {
+    const a = (): void => {
+      audio.play()
+      document.body.removeEventListener('click', a)
+      document.body.removeEventListener('touchstart', a)
+    }
+    document.body.addEventListener('click', a)
+    document.body.addEventListener('touchstart', a)
+  }, [audio])
+
+  return <Fc slapped={newSlapped} loading={loading} {...props} />
 }
