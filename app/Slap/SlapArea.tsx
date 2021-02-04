@@ -22,7 +22,11 @@ export const SlapArea: FC<SlapAreaPropTypes> = ({
 
   return (
     <div>
-      <img src={currentImage} className='mx-auto' />
+      <img
+        src={currentImage}
+        className='mx-auto'
+        style={{ width: 640, height: '100%' }}
+      />
     </div>
   )
 }
