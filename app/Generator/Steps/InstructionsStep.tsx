@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { ButtonWithSpinner } from 'app/Common/Button'
 import { TAKE_PHOTO_STEP, StepPropTypes } from 'app/Generator/Reducer'
-import { useBodyPixContext } from 'app/Services/Tensorflow'
+import { useBodyPixContext } from 'app/Services/Tensorflow/hooks'
 import { useStep } from 'app/Generator/useStep'
 import { VIDEO_CONSTRAINTS } from 'app/Generator/useVideoStream'
 

@@ -21,7 +21,7 @@ export const WithAudio = (
     )
   }, [])
   const newSlapped = useCallback(() => {
-    slapped()
+    slapped && slapped()
     audioSources[audioIndex].play()
     setAudioIndex((n) => (n + 1) % audioSources.length)
   }, [audioSources, audioIndex])

@@ -19,11 +19,11 @@ const LoadingSlapArea = compose(
 const SlapFields: FC<SlapAreaPropTypes> = (props) => {
   return (
     <ColLayout>
-      <div className='w-1/3 mb-3'>
+      <div className='mobile:w-full w-1/3 mb-3'>
         <Input name='name' placeholder='Your name here' />
       </div>
       <LoadingSlapArea {...props} />
-      <div className='w-1/2 mb-4'>
+      <div className='w-1/2 mb-4 mobile:w-full'>
         <Textarea name='message' placeholder='Leave a message' rows={5} />
       </div>
     </ColLayout>
@@ -36,8 +36,13 @@ interface FormValues {
 }
 
 const VALIDATION_SCHEMA: SchemaOf<FormValues> = object({
-  name: string().label('Name').required('This is needed so people know who they are slapping'),
-  message: string().label('Message').required('This is what people will read when slapping you').max(255)
+  name: string()
+    .label('Name')
+    .required('This is needed so people know who they are slapping'),
+  message: string()
+    .label('Message')
+    .required('This is what people will read when slapping you')
+    .max(255)
 })
 
 type FormPropTypes = SlapAreaPropTypes & {
