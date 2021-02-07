@@ -13,7 +13,7 @@ import { object, SchemaOf, string } from 'yup'
 
 const LoadingSlapArea = compose(
   IS_DESKTOP ? MouseControlled : TouchControlled,
-  WithLoading(640, 320)
+  WithLoading(640, 400)
 )(SlapArea)
 
 const SlapFields: FC<SlapAreaPropTypes> = (props) => {

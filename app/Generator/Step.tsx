@@ -11,7 +11,7 @@ import {
 
 import { InstructionsStep, ReviewStep, UploadStep } from 'app/Generator/Steps'
 
-import { BodyPixProvider } from 'app/Services/Tensorflow/hooks'
+import { BodyPixProvider } from 'app/Services/Tensorflow'
 import { TakePhotoStepMobile } from 'app/Generator/Steps/TakePhotoStepMobile'
 
 const STEPS: { [k in SlapStep]: FC<StepPropTypes> } = {

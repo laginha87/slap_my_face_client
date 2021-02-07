@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 
 export const VIDEO_CONSTRAINTS = {
-  width: 640, height: 360
+  width: 640, height: 400
 }
 
 const constraints = {

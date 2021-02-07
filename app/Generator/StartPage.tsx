@@ -34,7 +34,7 @@ export const StartPage: FC = () => {
 
       <StepCounter step={state.step} />
       <Title step={state.step} />
-      <Suspense fallback={<Loading width={640} height={320} />}>
+      <Suspense fallback={<Loading width={640} height={400} />}>
         <Step state={state} dispatch={dispatch} />
       </Suspense>
     </div>
