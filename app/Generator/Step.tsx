@@ -9,14 +9,18 @@ import {
   UPLOAD_STEP
 } from 'app/Generator/Reducer'
 
-import { InstructionsStep, ReviewStep, UploadStep } from 'app/Generator/Steps'
+import {
+  InstructionsStep,
+  ReviewStep,
+  TakePhotoStep,
+  UploadStep
+} from 'app/Generator/Steps'
 
 import { BodyPixProvider } from 'app/Services/Tensorflow'
-import { TakePhotoStepMobile } from 'app/Generator/Steps/TakePhotoStepMobile'
 
 const STEPS: { [k in SlapStep]: FC<StepPropTypes> } = {
   [INSTRUCTIONS_STEP]: InstructionsStep,
-  [TAKE_PHOTO_STEP]: TakePhotoStepMobile,
+  [TAKE_PHOTO_STEP]: TakePhotoStep,
   [UPLOAD_STEP]: UploadStep,
   [REVIEW_STEP]: ReviewStep
 }

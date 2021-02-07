@@ -28,7 +28,10 @@ const waitFor = async (ms: number): Promise<void> => {
   })
 }
 
-export const TakePhotoStep: FC<StepPropTypes> = ({ dispatch, state }) => {
+export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
+  dispatch,
+  state
+}) => {
   const [currentStep, setCurrentStep] = useState(0)
   const [, shutterAudio] = useAudio('shutter')
   const { side, text: instructionText } = SIDES[currentStep]

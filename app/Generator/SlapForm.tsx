@@ -67,11 +67,11 @@ export const SlapForm: FC<FormPropTypes> = ({
       <Form>
         <SlapFields {...props} />
         <div className='flex justify-center'>
-          <Button onClick={onCancel} theme='secondary'>
-            Start Over
-          </Button>
           <Button type='submit' ml='2'>
             Looks good
+          </Button>
+          <Button onClick={onCancel} theme='secondary'>
+            Start Over
           </Button>
         </div>
       </Form>
