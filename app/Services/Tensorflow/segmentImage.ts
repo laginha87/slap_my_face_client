@@ -5,12 +5,17 @@ export const segmentImage = async (
   image: HTMLImageElement | HTMLVideoElement,
   canvas: HTMLCanvasElement
 ): Promise<void> => {
+  const tempCanvas = document.createElement('canvas')
+  tempCanvas.width = canvas.width
+  tempCanvas.height = canvas.height
+  const tempContext = tempCanvas.getContext('2d')
   const context = canvas.getContext('2d')
-  if (context === null) {
+
+  if (context === null || tempContext === null) {
     throw new Error("Couldn't load context")
   }
 
-  context.drawImage(
+  tempContext.drawImage(
     image,
     0,
     0,
@@ -21,7 +26,8 @@ export const segmentImage = async (
     canvas.width,
     canvas.height
   )
-  var imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+  var imageData = tempContext.getImageData(0, 0, canvas.width, canvas.height)
+
   var pixel = imageData.data
   const res = await bodyPix.segmentPersonParts(imageData, {
     flipHorizontal: true,
