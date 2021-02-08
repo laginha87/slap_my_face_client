@@ -2,7 +2,7 @@ export class ExaustablePromise<T> {
   private readonly p: Promise<T>
   private fulfilled: boolean = false
   private v?: T
-  constructor(p: Promise<T>) {
+  constructor (p: Promise<T>) {
     this.p = p.then((b: T) => {
       this.fulfilled = true
       this.v = b
@@ -10,7 +10,7 @@ export class ExaustablePromise<T> {
     })
   }
 
-  get current(): Promise<T> | T {
+  get current (): Promise<T> | T {
     if (this.fulfilled) {
       return this.v as T
     } else {

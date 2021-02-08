@@ -36,13 +36,13 @@ export const WithLoading = <T extends {} = {}>(
   width: number,
   height: number
 ) => (Fc: FC<T>): LoadableComponent<T> => ({ loading, ...props }) => {
-  if (loading) {
-    return (
+    if (loading) {
+      return (
       <div className='flex justify-center'>
         <Loading width={width} height={height} />
       </div>
-    )
-  } else {
-    return <Fc {...(props as T)} />
+      )
+    } else {
+      return <Fc {...(props as T)} />
+    }
   }
-}

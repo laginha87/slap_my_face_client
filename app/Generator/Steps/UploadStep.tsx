@@ -67,18 +67,22 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
   return (
     <div className='mx-auto px-5'>
       <div className='w-full lg:w-1/2 mx-auto'>
-        {status === FORM_STATUS ? (
+        {status === FORM_STATUS
+          ? (
           <UploadForm onSubmit={upload} />
-        ) : status === UPLOADING_STATUS ? (
+            )
+          : status === UPLOADING_STATUS
+            ? (
           <ProgressBar value={uploadProgress} total={TOTAL_FILES} />
-        ) : (
+              )
+            : (
           <div>
             <div className='text-2xl'>
               All done checkout your link{' '}
               <Link href={`/slap/${slapId}`}>here</Link>
             </div>
           </div>
-        )}
+              )}
       </div>
     </div>
   )

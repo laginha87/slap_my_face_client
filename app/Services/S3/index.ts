@@ -50,7 +50,7 @@ export function useS3File<T> (path: string): [boolean, Partial<T>] {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       const f = await fetch(s3Url, {
         method: 'GET',
         headers: {

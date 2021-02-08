@@ -17,7 +17,7 @@ export const useBodyPixClient: () => ExaustablePromise<BodyPix> = () => {
 
   useEffect(() => {
     return () => {
-      Promise.resolve(bodyPixPromise.current).then((t) => t.dispose())
+      void Promise.resolve(bodyPixPromise.current).then((t) => t.dispose())
     }
   }, [])
 

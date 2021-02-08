@@ -30,7 +30,7 @@ export interface IState {
 
 export const ADD_IMAGES = 'ADD_IMAGES'
 
-export function addImagesAction(images: string[], side: Side): AddImagesAction {
+export function addImagesAction (images: string[], side: Side): AddImagesAction {
   return { type: ADD_IMAGES, images, side }
 }
 
@@ -42,7 +42,7 @@ export interface AddImagesAction {
 
 export const SET_STEP = 'SET_STEP'
 
-export function setStepAction(step: SlapStep): SetStepAction {
+export function setStepAction (step: SlapStep): SetStepAction {
   return { type: SET_STEP, step }
 }
 
@@ -53,7 +53,7 @@ export interface SetStepAction {
 
 export const SELECT_IMAGE = 'SELECT_IMAGE'
 
-export function selectImageAction(
+export function selectImageAction (
   image: string,
   side: Side
 ): SelectImageAction {
@@ -89,7 +89,7 @@ export const INITIAL_STATE: IState = {
 
 export const RESET_IMAGES = 'RESET_IMAGES'
 
-export function resetImagesAction(): ResetImagesAction {
+export function resetImagesAction (): ResetImagesAction {
   return { type: RESET_IMAGES }
 }
 
@@ -99,7 +99,7 @@ export interface ResetImagesAction {
 
 export const SET_TEXT_ELEMENTS = 'SET_TEXT_ELEMENTS'
 
-export function setTextElementsAction(
+export function setTextElementsAction (
   name: string,
   message: string
 ): SetTextElementsAction {

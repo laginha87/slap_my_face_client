@@ -21,15 +21,15 @@ export const WithAudio = (
     )
   }, [])
   const newSlapped = useCallback(() => {
-    slapped && slapped()
-    audioSources[audioIndex].play()
+    slapped?.()
+    void audioSources[audioIndex].play()
     setAudioIndex((n) => (n + 1) % audioSources.length)
   }, [audioSources, audioIndex])
 
   // Audio on ios just sucks
   useEffect(() => {
     const a = (): void => {
-      audio.play()
+      void audio.play()
       document.body.removeEventListener('click', a)
       document.body.removeEventListener('touchstart', a)
     }

@@ -9,8 +9,8 @@ const constraints = {
   aspectRatio: 1.777777778
 }
 
-export const requestVideoAccess = (): Promise<MediaStream> => {
-  return navigator.mediaDevices.getUserMedia({
+export const requestVideoAccess = async (): Promise<MediaStream> => {
+  return await navigator.mediaDevices.getUserMedia({
     audio: false,
     video: constraints
   })

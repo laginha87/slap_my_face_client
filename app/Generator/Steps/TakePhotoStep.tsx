@@ -62,7 +62,7 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
     await waitFor(1000)
     setText('1')
     await waitFor(1000)
-    takePic()
+    void takePic()
     setDone(true)
   }, [instructionText])
 

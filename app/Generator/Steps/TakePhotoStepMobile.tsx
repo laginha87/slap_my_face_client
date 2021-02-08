@@ -48,9 +48,9 @@ const LoadablePreview = WithLoading<{
   retry: () => void
   next: () => void
 }>(
-  640,
-  400
-)(ImagePreview)
+    640,
+    400
+    )(ImagePreview)
 
 export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -95,7 +95,8 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
 
   return (
     <div>
-      {image === '' && !loading ? (
+      {image === '' && !loading
+        ? (
         <label ref={fileInputRef}>
           <div className='bg-white text-black rounded p-40 text-3xl text-center'>
             {instructionText}
@@ -108,14 +109,15 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
             onChange={processImage}
           />
         </label>
-      ) : (
+          )
+        : (
         <LoadablePreview
           image={image}
           retry={retry}
           loading={loading}
           next={next}
         />
-      )}
+          )}
     </div>
   )
 }

@@ -4,7 +4,7 @@ export function useImage (path: string): boolean {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    var newImg = new Image()
+    const newImg = new Image()
     newImg.onload = () => {
       setIsLoading(false)
     }

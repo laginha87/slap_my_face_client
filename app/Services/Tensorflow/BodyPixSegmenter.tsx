@@ -23,10 +23,10 @@ export const BodyPixSegmenter: FC<PropTypes> = ({
       const { width, height } = v.getVideoTracks()[0].getSettings()
       const video = document.createElement('video')
       video.srcObject = v
-      video.width = width
-      video.height = height
+      video.width = width as number
+      video.height = height as number
       video.addEventListener('loadedmetadata', () => {
-        video.play()
+        void video.play()
       })
       video.addEventListener('loadeddata', () => {
         setVideoStream(video)
@@ -40,12 +40,12 @@ export const BodyPixSegmenter: FC<PropTypes> = ({
     }
     const bodyPixClient = await Promise.resolve(bodyPixClientPromise.current)
     await segmentImage(bodyPixClient, videoStream, canvasRef.current)
-    requestAnimationFrame(drawImage)
+    requestAnimationFrame(drawImage as () => void)
   }, [videoStream])
 
   useEffect(() => {
     if (videoStream !== undefined) {
-      drawImage()
+      void drawImage()
     }
   }, [videoStream])
 

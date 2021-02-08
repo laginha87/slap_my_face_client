@@ -26,9 +26,9 @@ export const segmentImage = async (
     canvas.width,
     canvas.height
   )
-  var imageData = tempContext.getImageData(0, 0, canvas.width, canvas.height)
+  const imageData = tempContext.getImageData(0, 0, canvas.width, canvas.height)
 
-  var pixel = imageData.data
+  const pixel = imageData.data
   const res = await bodyPix.segmentPersonParts(imageData, {
     flipHorizontal: true,
     internalResolution: 'low',
@@ -36,7 +36,7 @@ export const segmentImage = async (
     maxDetections: 1
   })
 
-  for (var p = 0; p < pixel.length; p += 4) {
+  for (let p = 0; p < pixel.length; p += 4) {
     if (res.data[p / 4] !== 0 && res.data[p / 4] !== 1) {
       pixel[p + 3] = 0
     }
