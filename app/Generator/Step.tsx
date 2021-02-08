@@ -16,8 +16,6 @@ import {
   UploadStep
 } from 'app/Generator/Steps'
 
-import { BodyPixProvider } from 'app/Services/Tensorflow'
-
 const STEPS: { [k in SlapStep]: FC<StepPropTypes> } = {
   [INSTRUCTIONS_STEP]: InstructionsStep,
   [TAKE_PHOTO_STEP]: TakePhotoStep,
@@ -27,11 +25,7 @@ const STEPS: { [k in SlapStep]: FC<StepPropTypes> } = {
 
 const Step: FC<StepPropTypes> = ({ state, dispatch }) => {
   const Component = STEPS[state.step]
-  return (
-    <BodyPixProvider>
-      <Component state={state} dispatch={dispatch} />{' '}
-    </BodyPixProvider>
-  )
+  return <Component state={state} dispatch={dispatch} />
 }
 
 export default Step

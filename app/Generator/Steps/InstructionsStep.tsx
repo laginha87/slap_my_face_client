@@ -1,14 +1,12 @@
 import { FC } from 'react'
 import { ButtonWithSpinner, Button } from 'app/Common/Button'
 import { TAKE_PHOTO_STEP, StepPropTypes } from 'app/Generator/Reducer'
-import { useBodyPixContext } from 'app/Services/Tensorflow'
 import { useStep } from 'app/Generator/useStep'
 import { IS_DESKTOP } from 'app/Utils/isDesktop'
 
 const DesktopInstructionsStep: FC<StepPropTypes> = ({ dispatch }) => {
-  const { isLoaded } = useBodyPixContext()
-
   const next = useStep(dispatch, TAKE_PHOTO_STEP)
+  // TODO ADD REQUEST VIDEO ACCESS
   return (
     <div style={{ height: 400 }} className='mx-auto'>
       <div className='flex items-center flex-col justify-center h-full'>
@@ -17,9 +15,7 @@ const DesktopInstructionsStep: FC<StepPropTypes> = ({ dispatch }) => {
           <li>Follow wizard to take pics</li>
           <li>Preview & Upload</li>
         </ol>
-        <ButtonWithSpinner onClick={next} loading={!isLoaded}>
-          NEXT
-        </ButtonWithSpinner>
+        <ButtonWithSpinner onClick={next}>NEXT</ButtonWithSpinner>
       </div>
     </div>
   )

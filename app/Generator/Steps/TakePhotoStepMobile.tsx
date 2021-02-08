@@ -6,7 +6,7 @@ import {
   Side,
   StepPropTypes
 } from 'app/Generator/Reducer'
-import { useSegmentImageFile } from 'app/Services/Tensorflow/useSegmentImageFile'
+import { useSegmentImageFile } from 'app/Services/Tensorflow'
 import { WithLoading } from 'app/Slap/Loading'
 import { ChangeEvent, FC, useCallback, useRef, useState } from 'react'
 

@@ -1,4 +1,4 @@
-import { FC, useCallback, useState, useEffect } from 'react'
+import { FC, useCallback, useState, useEffect, useRef } from 'react'
 import { Button } from 'app/Common/Button'
 import {
   addImagesAction,
@@ -7,8 +7,8 @@ import {
   Side,
   StepPropTypes
 } from 'app/Generator/Reducer'
-import { BodyPixSegmenter, useBodyPixContext } from 'app/Services/Tensorflow'
-import { VIDEO_CONSTRAINTS } from 'app/Generator/useVideoStream'
+import { BodyPixSegmenter } from 'app/Services/Tensorflow'
+import { VIDEO_CONSTRAINTS } from 'app/Services/Tensorflow/requestVideoAccess'
 import { useAudio } from 'app/Slap/useAudio'
 
 interface SideText {
@@ -36,9 +36,12 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
   const [, shutterAudio] = useAudio('shutter')
   const { side, text: instructionText } = SIDES[currentStep]
   const preview = state.takenImages[side][state.selectedImages[side]]
-  const { canvasRef } = useBodyPixContext()
+  const canvasRef = useRef<HTMLCanvasElement>()
 
   const takePic = useCallback(async () => {
+    if (canvasRef.current === undefined) {
+      return
+    }
     dispatch(addImagesAction([canvasRef.current.toDataURL()], side))
     return await (shutterAudio !== null
       ? shutterAudio.play()
@@ -82,10 +85,11 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
   useEffect(() => {
     currentStep > 0 && ready()
   }, [currentStep])
+
   return (
     <div>
       <div className='mx-auto' style={VIDEO_CONSTRAINTS}>
-        <BodyPixSegmenter enabled={!done} preview={preview} />
+        <BodyPixSegmenter preview={preview} canvasRef={canvasRef} />
       </div>
       <div className='absolute z-10 top-0 left-0 w-full h-full flex items-end pb-4 justify-center'>
         {firstPass && <Button onClick={ready}>Ready? </Button>}
