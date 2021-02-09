@@ -15,7 +15,7 @@ import { Title } from 'app/Common/Typography'
 const LoadingSlapArea = compose(
   WithAudio,
   IS_DESKTOP ? MouseControlled : TouchControlled,
-  WithLoading(640, 400))(
+  WithLoading(400))(
   SlapArea
 )
 

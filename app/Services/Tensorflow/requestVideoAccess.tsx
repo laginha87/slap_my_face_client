@@ -15,24 +15,3 @@ export const requestVideoAccess = async (): Promise<MediaStream> => {
     video: constraints
   })
 }
-
-// export const useVideoStream: () => [
-//   React.MutableRefObject<HTMLVideoElement>,
-//   () => void
-// ] = () => {
-//   const videoRef = useRef<HTMLVideoElement>(null)
-
-//   const videoPlay = useCallback(() => {
-//     videoRef.current.play()
-//   }, [])
-
-//   useEffect(() => {
-//     ;(async () => {
-//       videoRef.current.srcObject = await navigator.mediaDevices.getUserMedia({
-//         audio: false,
-//         video: constraints
-//       })
-//     })()
-//   }, [])
-//   return [videoRef, videoPlay]
-// }

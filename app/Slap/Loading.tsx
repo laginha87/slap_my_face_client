@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from 'react'
 
 interface LoadingProps {
-  width: number
   height: number
 }
 
-export const Loading: FC<LoadingProps> = ({ width, height }) => {
+export const Loading: FC<LoadingProps> = ({ height }) => {
   const [loadtext, setLoadtext] = useState('.')
 
   useEffect(() => {
@@ -21,9 +20,8 @@ export const Loading: FC<LoadingProps> = ({ width, height }) => {
     }
   }, [])
   return (
-    <div style={{ height, width }} className='text-3xl relative'>
-      <div className='absolute top-1/2 left-1/2 -ml-32'>
-        {' '}
+    <div style={{ height }} className='text-3xl flex justify-center w-full items-center'>
+      <div>
         Loading {loadtext}
       </div>
     </div>
@@ -33,13 +31,12 @@ export const Loading: FC<LoadingProps> = ({ width, height }) => {
 export type LoadableComponent<T> = FC<T & { loading: boolean }>
 
 export const WithLoading = <T extends {} = {}>(
-  width: number,
   height: number
 ) => (Fc: FC<T>): LoadableComponent<T> => ({ loading, ...props }) => {
     if (loading) {
       return (
       <div className='flex justify-center'>
-        <Loading width={width} height={height} />
+        <Loading height={height} />
       </div>
       )
     } else {

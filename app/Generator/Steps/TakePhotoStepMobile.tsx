@@ -1,4 +1,6 @@
 import { Button } from 'app/Common/Button'
+import { Icon } from 'app/Common/Icon'
+
 import {
   addImagesAction,
   REVIEW_STEP,
@@ -48,7 +50,6 @@ const LoadablePreview = WithLoading<{
   retry: () => void
   next: () => void
 }>(
-    640,
     400
     )(ImagePreview)
 
@@ -97,9 +98,10 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
     <div>
       {image === '' && !loading
         ? (
-        <label ref={fileInputRef}>
-          <div className='bg-white text-black rounded p-40 text-3xl text-center'>
-            {instructionText}
+        <label ref={fileInputRef} className="w-full flex flex-col items-center justify-center" style={{ height: 400 }}>
+          <div className="text-3xl mb-4 text-center">{instructionText}</div>
+          <div className="bg-white p-4 text-black rounded-sm">
+            <Icon size='3xl' type='camera'/>
           </div>
           <input
             className='hidden'

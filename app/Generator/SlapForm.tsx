@@ -13,17 +13,17 @@ import { object, SchemaOf, string } from 'yup'
 
 const LoadingSlapArea = compose(
   IS_DESKTOP ? MouseControlled : TouchControlled,
-  WithLoading(640, 400)
+  WithLoading(640)
 )(SlapArea)
 
 const SlapFields: FC<SlapAreaPropTypes> = (props) => {
   return (
-    <ColLayout>
-      <div className='mobile:w-full w-1/3 mb-3'>
+    <ColLayout className='max-w-2xl w-full mx-auto px-4 items-stretch'>
+      <div className='mb-3'>
         <Input name='name' placeholder='Your name here' />
       </div>
       <LoadingSlapArea {...props} />
-      <div className='w-1/2 mb-4 mobile:w-full'>
+      <div className='mb-4'>
         <Textarea name='message' placeholder='Leave a message' rows={5} />
       </div>
     </ColLayout>

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "./app/fonts.css";
+@import "./app/assets/icons/icons.css"
 
 .left {
   cursor: url(app/assets/right-hand.png), auto;
