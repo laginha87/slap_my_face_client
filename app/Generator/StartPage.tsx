@@ -29,14 +29,12 @@ export const StartPage: FC = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
 
   return (
-    <div className='mx-auto container'>
-      <h1 className='text-4xl text-center'>Slap My Face</h1>
-
+    <>
       <StepCounter step={state.step} />
       <Title step={state.step} />
       <Suspense fallback={<Loading height={400} />}>
         <Step state={state} dispatch={dispatch} />
       </Suspense>
-    </div>
+    </>
   )
 }

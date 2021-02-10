@@ -42,6 +42,7 @@ export const Slap: FC<{
       />
       <div className='py-5 text-3xl'>{counter}</div>
       <div className='px-4 py-2 border-white mt-4 border-t w-96'>{message}</div>
+
     </ColLayout>
   )
 }

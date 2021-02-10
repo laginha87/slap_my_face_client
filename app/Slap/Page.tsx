@@ -11,16 +11,13 @@ export const SlapPage: FC = () => {
   }>(`${id}/public`)
 
   return (
-    <div>
-      <h1 className='text-4xl text-center'>Slap My Face</h1>
-      <Slap
-        loading={loading}
-        left={buildS3Url(`${id}/left`)}
-        right={buildS3Url(`${id}/right`)}
-        center={buildS3Url(`${id}/center`)}
-        name={name}
-        message={message}
-      />
-    </div>
+    <Slap
+      loading={loading}
+      left={buildS3Url(`${id}/left`)}
+      right={buildS3Url(`${id}/right`)}
+      center={buildS3Url(`${id}/center`)}
+      name={name}
+      message={message}
+    />
   )
 }
