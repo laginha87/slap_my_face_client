@@ -13,8 +13,8 @@ export const SlapSample: FC = () => {
         left={left}
         right={right}
         center={center}
-        name='Sample'
-        message='Sample Message'
+        name='Filipe'
+        message='Hi I built this, checkout the link below on how to create your own'
       />
     </div>
   )

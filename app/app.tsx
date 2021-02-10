@@ -12,7 +12,7 @@ export const App: FC = () => {
       <Route path='/slap/:id' component={SlapPage} exact />
       <Route path='/generator' component={StartPage} exact />
       <Route path='/components' component={Components} exact />
-      {/* <Redirect from="/" to="/generator" exact /> */}
+      <Route from="/" component={SlapSample} exact/>
     </Router>
   )
 }
