@@ -20,7 +20,7 @@ export const App: FC = () => {
       </Router>
       <footer className='text-xs text-gray-500 text-center pt-40 pb-5 w-full'>
         Built by{' '}
-        <a href='https://filipe-correia.me' className='underline'>
+        <a href='https://filipe-correia.me' target='_blank' rel='noopener' className='underline'>
           Filipe Correia
         </a>
       </footer>
