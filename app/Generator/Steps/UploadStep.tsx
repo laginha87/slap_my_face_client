@@ -61,7 +61,7 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
       await Promise.all(promises)
       setStatus(UPLOADED_STATUS)
     },
-    [state]
+    [s3Client, slapId, state]
   )
 
   return (
@@ -69,19 +69,19 @@ export const UploadStep: FC<StepPropTypes> = ({ state }) => {
       <div className='w-full lg:w-1/2 mx-auto'>
         {status === FORM_STATUS
           ? (
-          <UploadForm onSubmit={upload} />
+            <UploadForm onSubmit={upload} />
             )
           : status === UPLOADING_STATUS
             ? (
-          <ProgressBar value={uploadProgress} total={TOTAL_FILES} />
+              <ProgressBar value={uploadProgress} total={TOTAL_FILES} />
               )
             : (
-          <div>
-            <div className='text-2xl'>
-              All done checkout your link{' '}
-              <Link href={`/slap/${slapId}`}>here</Link>
-            </div>
-          </div>
+              <div>
+                <div className='text-2xl'>
+                  All done checkout your link{' '}
+                  <Link href={`/slap/${slapId}`}>here</Link>
+                </div>
+              </div>
               )}
       </div>
     </div>

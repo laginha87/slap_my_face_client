@@ -18,6 +18,7 @@ export const SlapArea: FC<SlapAreaPropTypes> = ({
   useEffect(() => {
     setCurrentImage(props[side])
     side !== 'center' && slapped()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [side])
 
   return (

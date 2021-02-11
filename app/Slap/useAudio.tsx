@@ -12,7 +12,7 @@ export function useAudio (path: AudioType): [boolean, HTMLAudioElement] {
     audio.addEventListener('canplaythrough', () => {
       setIsLoading(false)
     })
-  }, [])
+  }, [audio])
 
   return [isLoading, audio]
 }

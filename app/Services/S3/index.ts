@@ -60,7 +60,7 @@ export function useS3File<T> (path: string): [boolean, Partial<T>] {
       setFile(await f.json())
       setLoading(false)
     })()
-  }, [])
+  }, [s3Url])
 
   return [loading, file]
 }

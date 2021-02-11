@@ -17,8 +17,10 @@ export const useBodyPixClient: () => ExaustablePromise<BodyPix> = () => {
 
   useEffect(() => {
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       void Promise.resolve(bodyPixPromise.current).then((t) => t.dispose())
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return bodyPixPromise

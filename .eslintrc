@@ -1,9 +1,24 @@
 {
-  "extends": "standard-with-typescript",
+  "extends": ["standard-with-typescript",  "plugin:react/recommended"],
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "no-void": "off"
+    "no-void": "off",
+    "react/jsx-indent": [2, 2, {"checkAttributes": true, "indentLogicalExpressions": true}],
+    "react/display-name": 2,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": 0,
+    "react/prop-types": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

@@ -46,7 +46,7 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
     return await (shutterAudio !== null
       ? shutterAudio.play()
       : new Promise(() => {}))
-  }, [side])
+  }, [dispatch, shutterAudio, side])
 
   const [firstPass, setFirstPass] = useState(true)
   const [text, setText] = useState<string>('')
@@ -64,13 +64,13 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
     await waitFor(1000)
     void takePic()
     setDone(true)
-  }, [instructionText])
+  }, [instructionText, takePic])
 
   const tryAgain = useCallback(async () => {
     setDone(false)
     setText('')
     await ready()
-  }, [])
+  }, [ready])
 
   const next = useCallback(() => {
     setDone(false)
@@ -80,11 +80,11 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
     } else {
       setCurrentStep(currentStep + 1)
     }
-  }, [currentStep])
+  }, [currentStep, dispatch])
 
   useEffect(() => {
     currentStep > 0 && ready()
-  }, [currentStep])
+  }, [currentStep, ready])
 
   return (
     <div>

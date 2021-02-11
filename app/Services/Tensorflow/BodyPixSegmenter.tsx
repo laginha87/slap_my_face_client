@@ -41,13 +41,13 @@ export const BodyPixSegmenter: FC<PropTypes> = ({
     const bodyPixClient = await Promise.resolve(bodyPixClientPromise.current)
     await segmentImage(bodyPixClient, videoStream, canvasRef.current)
     requestAnimationFrame(drawImage as () => void)
-  }, [videoStream])
+  }, [bodyPixClientPromise, canvasRef, videoStream])
 
   useEffect(() => {
     if (videoStream !== undefined) {
       void drawImage()
     }
-  }, [videoStream])
+  }, [drawImage, videoStream])
 
   return (
     <div className='relative'>

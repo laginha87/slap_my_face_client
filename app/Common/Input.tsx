@@ -43,6 +43,8 @@ export const Input: FC<InputAttributes> = memo(
   }
 )
 
+Input.displayName = 'Input'
+
 export const Textarea: FC<InputAttributes> = memo(
   ({ label, className = '', ...rest }) => {
     const [field, meta] = useField(rest)
@@ -60,3 +62,5 @@ export const Textarea: FC<InputAttributes> = memo(
     )
   }
 )
+
+Textarea.displayName = 'Textarea'

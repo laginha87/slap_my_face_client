@@ -25,8 +25,8 @@ const SIDES = [
 
 interface ImagePreviewProps {
   image: string
-  retry: () => {}
-  next: () => {}
+  retry: () => void
+  next: () => void
 }
 
 const ImagePreview: FC<ImagePreviewProps> = ({ image, retry, next }) => {
@@ -76,7 +76,7 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
       setImage('')
       setCurrentStep(currentStep + 1)
     }
-  }, [currentStep, side, image])
+  }, [currentStep, dispatch, image, side])
 
   const processImage = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +86,7 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
         segmentImageFile(input.files[0])
       }
     },
-    [side, segmentImageFile]
+    [segmentImageFile]
   )
 
   const retry = useCallback(() => {
@@ -98,22 +98,22 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
     <div>
       {image === '' && !loading
         ? (
-        <label ref={fileInputRef} className="w-full flex flex-col items-center justify-center" style={{ height: 400 }}>
-          <div className="text-3xl mb-4 text-center">{instructionText}</div>
-          <div className="bg-white p-4 text-black rounded-sm">
-            <Icon size='3xl' type='camera'/>
-          </div>
-          <input
+          <label ref={fileInputRef} className="w-full flex flex-col items-center justify-center" style={{ height: 400 }}>
+            <div className="text-3xl mb-4 text-center">{instructionText}</div>
+            <div className="bg-white p-4 text-black rounded-sm">
+              <Icon size='3xl' type='camera'/>
+            </div>
+            <input
             className='hidden'
             type='file'
             accept='image/*'
             capture='user'
             onChange={processImage}
           />
-        </label>
+          </label>
           )
         : (
-        <LoadablePreview
+          <LoadablePreview
           image={image}
           retry={retry}
           loading={loading}

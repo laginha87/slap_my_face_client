@@ -17,7 +17,7 @@ export const useSegmentImageFile: (
       await segmentImage(bodyPix, img, canvas)
       setImageCb(canvas.toDataURL())
     },
-    [bodyPixClientPromise]
+    [bodyPixClientPromise, setImageCb]
   )
 
   return loadFile
