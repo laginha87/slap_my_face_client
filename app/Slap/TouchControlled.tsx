@@ -32,21 +32,6 @@ export const TouchControlled: Hoc<Loadable<SlapAreaPropTypes>> = (
       [setSide, touchStartPos]
     )
 
-    // TODO Extract
-    // useEffect(() => {
-    //   const app = document.getElementById('app') as HTMLDivElement
-    //   const listener = (e: TouchEvent): void => {
-    //     const cursor = e.clientX > window.innerWidth / 2 ? 'left' : 'right'
-    //     app.classList.remove('right', 'left')
-    //     app.classList.add(cursor)
-    //   }
-    //   app.addEventListener('mousemove', listener as any)
-
-    //   return () => {
-    //     app.classList.remove('right', 'left')
-    //     app.removeEventListener('mousemove', listener as any)
-    //   }
-    // }, [])
     return (
       <div
       onTouchStart={onTouchStart}

@@ -1,4 +1,4 @@
-import { useCallback, useState, MouseEvent, useEffect } from 'react'
+import { useCallback, useState, MouseEvent } from 'react'
 import { SlapAreaPropTypes } from 'app/Slap/SlapArea'
 import { useSlap } from 'app/Slap/useSlap'
 import { LoadableComponent } from 'app/Slap/Loading'
@@ -9,7 +9,7 @@ export function MouseControlled (
   const NewComponent: LoadableComponent<SlapAreaPropTypes> = ({ side: _side, ...props }) => {
     const [mouseEnterPos, setMouseEnterPos] = useState(0)
     const [side, setSide] = useSlap()
-
+    const [cursorSide, setCursorSide] = useState('left')
     const onMouseEnter = useCallback(
       (e: MouseEvent<HTMLDivElement>) => {
         setMouseEnterPos(e.pageX)
@@ -24,24 +24,14 @@ export function MouseControlled (
       [mouseEnterPos, setSide]
     )
 
-    // TODO Extract
-    useEffect(() => {
-      const app = document.getElementById('app') as HTMLDivElement
-      const listener = (e: MouseEvent): void => {
-        const cursor = e.clientX > window.innerWidth / 2 ? 'left' : 'right'
-        app.classList.remove('right', 'left')
-        app.classList.add(cursor)
-      }
-      app.addEventListener('mousemove', listener as any)
-
-      return () => {
-        app.classList.remove('right', 'left')
-        app.removeEventListener('mousemove', listener as any)
-      }
+    const onMouseMove = useCallback((e: MouseEvent): void => {
+      setCursorSide(e.clientX > window.innerWidth / 2 ? 'left' : 'right')
     }, [])
+
     return (
-      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <div className={`relative ${cursorSide}`} onMouseMove={onMouseMove}>
         <Fc side={side} {...props} />
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="absolute top-0 left-1/4 w-1/2 h-full" />
       </div>
     )
   }
