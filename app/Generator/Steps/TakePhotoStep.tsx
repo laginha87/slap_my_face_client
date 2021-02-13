@@ -87,7 +87,7 @@ export const TakePhotoStepDesktop: FC<StepPropTypes> = ({
   }, [currentStep, ready])
 
   return (
-    <div>
+    <div className='relative'>
       <div className='mx-auto' style={VIDEO_CONSTRAINTS}>
         <BodyPixSegmenter preview={preview} canvasRef={canvasRef} />
       </div>
