@@ -2,10 +2,7 @@ import { FC } from 'react'
 import { useParams } from 'react-router-dom'
 import { Slap } from 'app/Slap/Slap'
 import { useS3File, buildS3Url } from 'app/Services/S3'
-
-const GeneratorLink: FC = () => <div>
-  <div>Create your own version with the generator</div>
-</div>
+import { GeneratorLink } from 'app/Slap/GeneratorLink'
 
 export const SlapPage: FC = () => {
   const { id } = useParams<{ id: string }>()
