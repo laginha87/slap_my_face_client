@@ -29,12 +29,12 @@ export const Loading: FC<LoadingProps> = ({ height }) => {
 }
 
 export type LoadableComponent<T> = FC<Loadable<T>>
-export type Loadable<T> = T & { loading: boolean }
+export type Loadable<T> = T & { loading?: boolean }
 
 export const WithLoading = <T extends {} = {}>(
   height: number
 ) => (Fc: FC<T>): LoadableComponent<T> => ({ loading, ...props }) => {
-    if (loading) {
+    if (loading !== undefined && loading) {
       return (
         <div className='flex justify-center'>
           <Loading height={height} />
