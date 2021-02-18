@@ -5,6 +5,7 @@ import {
 } from 'app/Services/Tensorflow/requestVideoAccess'
 import { useBodyPixClient } from 'app/Services/Tensorflow/useBodyPixClient'
 import { segmentImage } from 'app/Services/Tensorflow/segmentImage'
+import { useCatchError } from 'app/Error/useCatchError'
 
 interface PropTypes {
   preview?: string
@@ -15,6 +16,8 @@ export const BodyPixSegmenter: FC<PropTypes> = ({
   preview = '',
   canvasRef
 }) => {
+  const throwErr = useCatchError()
+
   const [videoStream, setVideoStream] = useState<HTMLVideoElement>()
   const bodyPixClientPromise = useBodyPixClient()
 
@@ -31,8 +34,8 @@ export const BodyPixSegmenter: FC<PropTypes> = ({
       video.addEventListener('loadeddata', () => {
         setVideoStream(video)
       })
-    })
-  }, [])
+    }).catch(throwErr)
+  }, [throwErr])
 
   const drawImage = useCallback(async () => {
     if (videoStream === undefined || canvasRef.current === undefined) {
