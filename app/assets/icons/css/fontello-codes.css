@@ -1,2 +1,4 @@
 
 .icon-camera:before { content: '\e800'; } /* '' */
+.icon-volume-off:before { content: '\e801'; } /* '' */
+.icon-volume-up:before { content: '\e802'; } /* '' */
