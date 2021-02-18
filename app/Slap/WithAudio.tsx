@@ -1,22 +1,28 @@
+import { Hoc } from 'app/Slap/Hoc'
 import { Loadable, LoadableComponent } from 'app/Slap/Loading'
 import { SlapAreaPropTypes } from 'app/Slap/SlapArea'
 import { useAudio } from 'app/Slap/useAudio'
-import { FC, useCallback, useEffect, useState } from 'react'
+import { Controlled } from 'app/Slap/WithControls'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Icon } from 'app/Common/Icon'
 
-type Hoc<T> = (Fc: FC<T>) => FC<T>
-
-export const WithAudio: Hoc<Loadable<SlapAreaPropTypes>> = (
+export const WithAudio: Hoc<Loadable<Controlled<SlapAreaPropTypes>>> = (
   Fc
 ) => {
-  const ResComponent: LoadableComponent<SlapAreaPropTypes> = ({
+  const ResComponent: LoadableComponent<Controlled<SlapAreaPropTypes>> = ({
     slapped,
     loading,
+    controls = [],
     ...props
   }) => {
+    const [audioEnabled, setAudioEnabled] = useState(true)
     const [, audio] = useAudio('slap')
     const [audioIndex, setAudioIndex] = useState(0)
     const [audioSources, setAudioSources] = useState<HTMLAudioElement[]>([])
 
+    const toggleAudioCallback = useCallback(() => setAudioEnabled((a) => !a), [])
+
+    const newControls = useMemo(() => [...controls, <Icon key="mute" size='3xl' onClick={toggleAudioCallback} type={audioEnabled ? 'volume-up' : 'volume-off'}/>], [audioEnabled, controls, toggleAudioCallback])
     useEffect(() => {
       setAudioSources(
         Array(100)
@@ -26,9 +32,11 @@ export const WithAudio: Hoc<Loadable<SlapAreaPropTypes>> = (
     }, [audio.src])
     const newSlapped = useCallback(() => {
       slapped?.()
-      void audioSources[audioIndex].play()
+      const nextAudio = audioSources[audioIndex]
+      nextAudio.volume = 0.4
+      audioEnabled && void audioSources[audioIndex].play()
       setAudioIndex((n) => (n + 1) % audioSources.length)
-    }, [slapped, audioSources, audioIndex])
+    }, [slapped, audioSources, audioIndex, audioEnabled])
 
     // Audio on ios just sucks
     useEffect(() => {
@@ -41,7 +49,7 @@ export const WithAudio: Hoc<Loadable<SlapAreaPropTypes>> = (
       document.body.addEventListener('touchstart', a)
     }, [audio])
 
-    return <Fc slapped={newSlapped} loading={loading} {...props} />
+    return <Fc slapped={newSlapped} loading={loading} controls={newControls} {...props} />
   }
   ResComponent.displayName = `WithAudio${Fc.displayName === undefined ? '' : Fc.displayName}`
   return ResComponent

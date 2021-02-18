@@ -11,9 +11,11 @@ import { WithAudio } from 'app/Slap/WithAudio'
 import { compose } from 'lodash/fp'
 import { ColLayout } from 'app/Common/Layouts'
 import { Title } from 'app/Common/Typography'
+import { WithControls } from 'app/Slap/WithControls'
 
 const LoadingSlapArea = compose(
   WithAudio,
+  WithControls,
   IS_DESKTOP ? MouseControlled : TouchControlled,
   WithLoading(400))(
   SlapArea
