@@ -2,3 +2,8 @@
 .icon-camera:before { content: '\e800'; } /* '' */
 .icon-volume-off:before { content: '\e801'; } /* '' */
 .icon-volume-up:before { content: '\e802'; } /* '' */
+.icon-cancel:before { content: '\e803'; } /* '' */
+.icon-desktop:before { content: '\f108'; } /* '' */
+.icon-help:before { content: '\f128'; } /* '' */
+.icon-info:before { content: '\f129'; } /* '' */
+.icon-share:before { content: '\f1e0'; } /* '' */
