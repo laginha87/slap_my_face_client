@@ -100,8 +100,8 @@ export const TakePhotoStepMobile: FC<StepPropTypes> = ({ dispatch, state }) => {
         ? (
           <label ref={fileInputRef} className="w-full flex flex-col items-center justify-center" style={{ height: 400 }}>
             <div className="text-3xl mb-4 text-center">{instructionText}</div>
-            <div className="bg-white p-4 text-black rounded-sm">
-              <Icon size='3xl' type='camera'/>
+            <div className="bg-white p-4 rounded-sm">
+              <Icon size='3xl' color="black" type='camera'/>
             </div>
             <input
             className='hidden'
