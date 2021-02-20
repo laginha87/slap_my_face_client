@@ -29,7 +29,10 @@ export class ErrorWrapper extends Component<ErrorProps, ErrorState> {
     const { children, handleError } = this.props
 
     if (hasError) {
-      return <div className="flex h-full items-center justify-center mx-auto border-4 border-white" style={VIDEO_CONSTRAINTS}>
+      return <div className="flex h-full items-center justify-center mx-auto border-4 border-white w-full" style={{
+        maxWidth: VIDEO_CONSTRAINTS.width,
+        height: VIDEO_CONSTRAINTS.height
+      }}>
         <div>{handleError(error)}</div>
       </div>
     } else {
