@@ -34,7 +34,7 @@
     "@tensorflow/tfjs-core": "^2.8.5",
     "autoprefixer": "^9",
     "formik": "^2.2.6",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "postcss": "^7",
     "postcss-modules": "^4.0.0",
     "react": "^17.0.1",
